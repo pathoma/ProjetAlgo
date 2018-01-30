@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int tableauMot[],
+char tableauMot[],
 
 void lire_fichier{
 	char nomFichier[20];
