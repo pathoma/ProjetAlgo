@@ -1,32 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char tableauMot[40];
+char *tableauMot[50];
 int nbmot =0;
 
 void lire_fichier(void){
-	char nomFichier[20];
+	/*char nomFichier[15]="list_ani.txt";*/
+	char motarecup[20];
 	FILE * fichier;
-	printf("quel est le nom du fichier?");
-	scanf("%s",nomFichier);
-	fichier=fopen(nomFichier,"r");
 
-	char mot[100];
+	/*printf("quel est le nom du fichier? : ");
+	scanf("%s",nomFichier);*/
+
+	fichier=fopen("list_ani.txt","r");
+
+	
 	while(!feof(fichier))
 		{
-			fscanf(fichier,"%s",&mot);
-			tableauMot[nbmot]=mot;
+			fscanf(fichier,"%s",motarecup);
+			tableauMot[nbmot]=motarecup;
 			nbmot++;
 		}
 		fclose(fichier);
 }
 
-int main() {
-
-	lire_fichier();
-	for(int i=0; i<=nbmot; i++)
-	{
-		printf("%s\n",tableauMot[i]);
-
-	}
-}
