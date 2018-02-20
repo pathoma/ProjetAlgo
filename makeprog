@@ -1,0 +1,7 @@
+programme: generation.o mot.o 
+	gcc  mot.o generation.o -o programme
+mot.o: mot.c
+	gcc -c mot.c
+
+generation.o: generation.c
+	gcc -c generation.c
