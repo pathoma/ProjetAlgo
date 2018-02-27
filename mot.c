@@ -52,11 +52,16 @@ extern void supprime_mot(int i){
 	}
 	else
 	{
-		for (i;i<nbmot;i++)
+		for (int y=i;y<nbmot;y++)
 		{
-			tableauMot[i]=tableauMot[i+1];
+			tableauMot[y]=tableauMot[y+1];
 		}
 		free(tableauMot[nbmot]);
 		nbmot--;
 	}
+}
+
+extern int taille_mot(int i){
+return strlen(tableauMot[i]);
+
 }
