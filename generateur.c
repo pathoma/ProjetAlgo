@@ -64,12 +64,14 @@ void inserer(int i1,int j1,int direction,int T){
 	int i,j;
 	
 	printf("début inséré \n");
-	
+	printf("direction : %i , i1 = %i , j1 = %i  \n",direction,i1,j1);
+
 	while(fin2!=1){
 		
 		while(fin!=1){
 			
 			if(direction==1){
+				
 				if(i1-T>=0){
 					for(i=0;i<T;i++){
 						mat[i1-i][j1]=mot[i];
@@ -80,7 +82,7 @@ void inserer(int i1,int j1,int direction,int T){
 			}
 			
 			if(direction==2){
-				if(i1-T>=0 && j1+T<=M){
+				if(i1-T>=0 && j1+T<M){
 					for(i=0;i<T;i++){
 						mat[i1-i][j1+i]=mot[i];
 					}
@@ -90,7 +92,7 @@ void inserer(int i1,int j1,int direction,int T){
 			}
 			
 			if(direction==3){
-				if(j1+T<=M){
+				if(j1+T<M){
 					for(i=0;i<T;i++){
 						mat[i1][j1+i]=mot[i];
 					}
@@ -100,7 +102,7 @@ void inserer(int i1,int j1,int direction,int T){
 			}
 			
 			if(direction==4){
-				if(i1+T<=N && j1+T<=M){
+				if(i1+T<N && j1+T<M){
 					for(i=0;i<T;i++){
 						mat[i1+i][j1+i]=mot[i];
 					}
@@ -110,7 +112,7 @@ void inserer(int i1,int j1,int direction,int T){
 			}
 			
 			if(direction==5){
-				if(i1+T<=N){
+				if(i1+T<N){
 					for(i=0;i<T;i++){
 						mat[i1+i][j1]=mot[i];
 					}
@@ -120,7 +122,7 @@ void inserer(int i1,int j1,int direction,int T){
 			}
 			
 			if(direction==6){
-				if(i1+T<=N && j1-T>=0){
+				if(i1+T<N && j1-T>=0){
 					for(i=0;i<T;i++){
 						mat[i1+i][j1-i]=mot[i];
 					}
@@ -152,6 +154,7 @@ void inserer(int i1,int j1,int direction,int T){
 		fin=0;
 		direction=direction+1;
 		if(direction==9) direction=1;
+		printf("direction++\n");
 	}
 }
 	
@@ -189,7 +192,7 @@ void premier_mot(){
 	int sens = rand()%2+1;
 	if(sens==1) inversion();
 	
-	int direction = rand()%8;
+	int direction = rand()%8+1;
 	T=strlen(mot);
 	
 	
