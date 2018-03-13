@@ -8,10 +8,10 @@ extern mat_t creer_matrice(int ligne,int colonne)
 	mat_t ma_mat;
 	ma_mat.nbl=ligne;
 	ma_mat.nbc=colonne;
-	ma_mat.val= (char **) malloc(ma_mat.nbc *sizeof(char *));
+	ma_mat.val= (char **) malloc(ma_mat.nbl *sizeof(char *));
 	for (int i=0; i<ma_mat.nbl;i++)
 	{
-		ma_mat.val[i]=(char*) malloc(ma_mat.nbl *sizeof(char));
+		ma_mat.val[i]=(char*) malloc(ma_mat.nbc *sizeof(char));
 	}
 
 	return ma_mat;
@@ -41,3 +41,11 @@ extern void init_matrice(mat_t ma_mat){
 	}
 }
 
+extern void supprim_mat(mat_t ma_mat)
+{
+	for (int i=0; i<ma_mat.nbl;i++)
+	{
+		free(ma_mat.val[i]);
+	}
+	free(ma_mat.val);
+}

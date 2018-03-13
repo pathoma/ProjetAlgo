@@ -8,3 +8,4 @@ char ** val;
 extern mat_t creer_matrice(int ligne ,int colonne);
 extern void init_matrice(mat_t ma_mat);
 extern void affiche_matrice(mat_t ma_mat);
+extern void supprim_mat(mat_t ma_mat);
