@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <string.h> 
 #include "mot.h"
+#include "outil.h"
 
 char *tableauMot[];
 int nbmot = 0;
-
+ 
 extern void lire_fichier(void){
 	/*char nomFichier[15]="list_ani.txt";*/
 	char motarecup[20];
@@ -32,17 +33,30 @@ extern void lire_fichier(void){
 
  
 extern void lire_tableau_mots(void){
-	int i;	
 	printf("\n lecture des mots \n");
+	lire_tableau(tableauMot,nbmot);
 	
-	for (i=0; i<= nbmot;i++)
-	{
-		printf("%s|",tableauMot[i]);  
-	}
-	printf("\n");
 }
 
 extern  char * recup_mot(int i){
 	
 	return tableauMot[i];
+}
+
+
+extern void supprime_mot(int i){
+	if (i==nbmot)
+	{
+		free(tableauMot[i]);
+		nbmot--;
+	}
+	else
+	{
+		for (i;i<nbmot;i++)
+		{
+			tableauMot[i]=tableauMot[i+1];
+		}
+		free(tableauMot[nbmot]);
+		nbmot--;
+	}
 }

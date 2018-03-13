@@ -1,0 +1,1 @@
+extern void lire_tableau(char * tableau[], int taille );

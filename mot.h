@@ -1,4 +1,12 @@
-char *tableauMot[50];
-int nbmot =0;
+#ifndef _MOT_H_
+#define _MOT_H_
 
-extern void lire_fichier(void)
+extern char *tableauMot[50];
+extern int nbmot;
+ 
+
+extern void lire_fichier(void);
+extern void lire_tableau_mots(void);
+extern char * recup_mot(int i);
+extern void supprime_mot(int i);
+#endif
