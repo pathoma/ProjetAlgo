@@ -45,18 +45,57 @@ void init_matrice(void){
 			mat[i][j]='0';
 		}
 	}
+/*
+	mat[0][0]='A';
+	mat[14][14]='X';
+	mat[3][5]='C';
+	mat[7][3]='V';	
+	mat[1][0]='M';
+	mat[2][0]='N';
+	mat[5][0]='P';
+	mat[1][14]='J';
+*/
 }
+
+
+
 
 void afficher_matrice(void){
 	int i;
 	int j;
-	for(i=0;i<N;i++){
-		for(j=0;j<M;j++){
-			printf("%c  ",mat[i][j]);
+	int numero=-1;
+	int numero2=0;
+	int condi=1 ;
+	int premier=0;
+
+	
+	for(i=-1;i<N;i++){
+		for(j=0;j<M+1;j++){
+			
+			if(condi==0){
+				printf("%2i",numero2);
+				numero2++;
+				condi=2;
+			}
+			if(condi==1){
+				printf("%2i ",numero);
+				numero++;
+
+			} else {
+				if(premier==1){
+					printf(" ");
+					premier=2;
+				}
+				if(j<M)printf("%2c ",mat[i][j]);
+
+			}
 		}
+		condi=0;
+		premier=1;
 		printf("\n");
 	}
 }
+
 
 void inserer(int i1,int j1,int direction,int T){
 	
@@ -237,26 +276,7 @@ int mot_trouver(int i1,int j1,int i2,int j2){
 }
 	
 	
-/*void premier_mot(){
-	
 
-	
-	int i1,j1,i,j,T;
-	i1=rand()%N;
-	j1=rand()%M;
-	
-	int sens = rand()%2+1;
-	if(sens==1) inversion();
-	
-	int direction = rand()%8+1;
-	T=strlen(mot);
-	
-	
-	printf("T : %i \n",T);
-	inserer(i1,j1,direction,T);
-
-}
-*/
 
 void premier_mot(){
 	
@@ -294,6 +314,7 @@ int main(){
 	srand(time(NULL));
 	
 	init_matrice();
+	
 	premier_mot();
 	afficher_matrice();
 
@@ -302,13 +323,13 @@ int main(){
 	
 	
 	do{
-	printf("veuillez saisir l'adresse du DEBUT en commencent par le numéro de ligne puis le numéro de colonne (compter  patir de 0) : ");
+	printf("veuillez saisir l'adresse du DEBUT en commencent par le numéro de ligne puis le numéro de colonne : ");
 	scanf("%i%i",&deb1,&deb2);
 	}while(deb1>N||deb1>M||deb2>N||deb2>M||deb1<0||deb1<0||deb2<0||deb2<0);
 
 	
 	do{
-	printf("veuillez saisir l'adresse de FIN en commencent par le numéro de ligne puis le numéro de colonne (compter à patir de 0) : ");
+	printf("veuillez saisir l'adresse de FIN en commencent par le numéro de ligne puis le numéro de colonne  : ");
 	scanf("%i%i",&fin1,&fin2);
 	}while(fin1>N||fin1>M||fin2>N||fin2>M||fin1<0||fin1<0||fin2<0||fin2<0);
 
@@ -324,13 +345,3 @@ int main(){
 	
 }
 
-
-/*int main(){
-	
-	int i1;
-	srand(time(NULL));
-	
-	i1= rand()%2+1;
-	printf("\n%i\n",i1);
-}
-*/
