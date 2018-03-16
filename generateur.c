@@ -7,6 +7,7 @@
 #define M 15
 char mat[N][M];
 char mot[100];
+char trouver[20];
 
 void inversion(void){
 	
@@ -158,6 +159,82 @@ void inserer(int i1,int j1,int direction,int T){
 	}
 }
 	
+
+
+int mot_trouver(int i1,int j1,int i2,int j2){
+	
+	int i;
+	int taille;
+	
+
+	if(i1==i2&&j1<j2){              	//horizontal à l'endroit 3
+		
+		taille=(j2-j1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1][j1+i];
+		}
+		return taille;
+	}
+	
+	
+	if(i1==i2&&j1>j2){              	//horizontal à l'envers 7
+		
+		taille=(j1-j2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1][j1-i];
+		}
+		return taille;
+	}
+	
+	else if(j1==j2&&i1<i2){		//vertical haut bas 5
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1];
+		}
+		return taille;
+	}
+	
+	else if(j1==j2&&i2<i1){		//vertical bas haut 1
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1-i][j1];
+		}
+		return taille;
+	}
+
+	else if(i2>i1&&j2>j1){		//diagonal bas droite 4
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1+i];
+		}
+		return taille;
+	}
+
+	else if(i1>i2&&j1>j2){		//diagonal haut gauche 8
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1-i][j1-i];
+		}
+		return taille;
+	}
+	
+	else if(i2>i1&&j1>j2){		//diagonal bas gauche 6
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1-i];
+		}
+		return taille;
+	}
+
+	else if(i1>i2&&j2>j1){		//diagonal haut droit 2
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			mot[i]=mat[i1-i][j1+i];
+		}
+		return taille;
+	}
+	
+}
 	
 	
 /*void premier_mot(){
@@ -202,6 +279,9 @@ void premier_mot(){
 }
 
 int main(){
+	int taille;
+	int deb1,deb2,fin1,fin2;	
+	char a;
 	
 	mot[0]='b';
 	mot[1]='o';
@@ -216,6 +296,32 @@ int main(){
 	init_matrice();
 	premier_mot();
 	afficher_matrice();
+
+
+
+	
+	
+	do{
+	printf("veuillez saisir l'adresse du DEBUT en commencent par le numéro de ligne puis le numéro de colonne (compter  patir de 0) : ");
+	scanf("%i%i",&deb1,&deb2);
+	}while(deb1>N||deb1>M||deb2>N||deb2>M||deb1<0||deb1<0||deb2<0||deb2<0);
+
+	
+	do{
+	printf("veuillez saisir l'adresse de FIN en commencent par le numéro de ligne puis le numéro de colonne (compter à patir de 0) : ");
+	scanf("%i%i",&fin1,&fin2);
+	}while(fin1>N||fin1>M||fin2>N||fin2>M||fin1<0||fin1<0||fin2<0||fin2<0);
+
+
+	taille=mot_trouver(deb1,deb2,fin1,fin2);
+	
+	printf("\n");
+	for(int i=0;i<taille;i++){
+		a=trouver[i];
+		printf("%c",a);
+	}
+	printf("\n");
+	
 }
 
 
