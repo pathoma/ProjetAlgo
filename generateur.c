@@ -2,12 +2,15 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include"mot.h"
 
 #define N 15
 #define M 15
 char mat[N][M];
 char mot[100];
 char trouver[20];
+
+int PlacerMot(int coordX,int coordY, char * motmis);
 
 void inversion(void){
 	
@@ -295,7 +298,162 @@ void premier_mot(){
 	
 	printf("T : %i \n",T);
 	inserer(i1,j1,direction,T);
+	char * motaenvoyer=mot;
+	PlacerMot(i1,j1,motaenvoyer);
+}
+int parcours_libre(int coordX,int coordY,int direction)
+{
+	int nbprochainelettre =0;
+	int compteur1=0;
+	int compteur2=0;
+	switch (direction)
+	{
+	case 1:
+		compteur2=-1;
+		break;
+	case 2:
+		compteur1=1;
+		compteur2=-1;
+		break;
+	case 3:
+		compteur1=1;
+		break;
+	case 4:
+		compteur1=1;
+		compteur2=1;
+		break;
+	case 5:
+		compteur2=1;
+		break;
+	case 6:
+		compteur1=-1;
+		compteur2=1;
+	  break;
+	  case 7:
+	  	  compteur1=-1;
+		compteur2= 0;
+	  break;
+	default:
+		compteur1=-1;
+		compteur2=-1;
+		break;
+	}
+	coordX += compteur1;
+	coordY += compteur2;
 
+	char lettre='0';
+	while (lettre == '0' && coordX<15 && coordX>0 && coordY<15  && coordY>0)
+	{
+		if(mat[coordX+compteur1][coordY+compteur2]=='0')
+		{
+				nbprochainelettre++;
+				//lettre= mat[coordX+compteur][coordY+compteur2];
+		}
+		else{
+			lettre=mat[coordX+compteur1][coordY+compteur2];
+		}
+		coordX += compteur1;
+		coordY += compteur2;	
+	}
+	
+	return nbprochainelettre;
+}
+
+int PlacerMot(int coordX,int coordY, char * motmis)
+{	/*mot[0]='b';
+	mot[1]='a';
+	mot[2]='l';
+	mot[3]='l';
+	mot[4]='e';*/
+	printf("enter dans placer mot : %s #\n",motmis);
+	int taille_motmis=strlen(motmis);
+	int tour =0;
+	int compteur =0;
+	int commencement= rand()%15;
+	int tailleavantlettre=0;
+	int direction=rand()%8+1;
+	int directinverse=direction+4%8;
+	do	
+	{	
+		for (int i=commencement;i<nbmot; i++)
+		{
+			char * motrecup=recup_mot(i);
+			tailleavantlettre=0;
+			
+			for (int j=0;j<taille_mot(i); j++)
+			{
+				printf("%s : %s \n",motmis, motrecup);
+				for (int a=0;a<taille_motmis;a++)
+				{
+					if(motrecup[j]==motmis[a])
+					{
+						do{	
+							if(parcours_libre(coordX,coordY,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coordX,coordY,directinverse)>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
+							{
+								for (int x=0; x<taille_mot(i);x++)
+								{
+									mot[x]=motrecup[x];
+								}
+								switch (direction)
+								{
+								case 1:
+									coordY+=tailleavantlettre;
+									break;
+								case 2:
+									coordX+=tailleavantlettre;
+									coordY-=tailleavantlettre;
+									break;
+								case 3:
+									coordX-=tailleavantlettre;
+									break;
+								case 4:
+									coordX-=tailleavantlettre;
+									coordY-=tailleavantlettre;
+									break;
+								case 5:
+									coordY-=tailleavantlettre;
+									break;
+								case 6:
+									coordX-=tailleavantlettre;
+									coordY+=tailleavantlettre;
+								  break;
+								  case 7:
+									coordX+=tailleavantlettre;
+								  break;
+								default:
+									coordX+=tailleavantlettre;
+									coordY+=tailleavantlettre;
+									break;
+								}	
+								inserer(coordX,coordY,direction,taille_mot(i));
+								compteur =8;
+								printf("\n");	
+							return 0;
+							}
+							else /* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
+							{
+								if(direction==8)
+								{
+									direction=1;
+								}
+								else
+									direction++;
+									directinverse=direction+4%8;
+									compteur++;
+					
+							}
+						}while(compteur<8);
+				
+					}
+				}
+				tailleavantlettre++;
+			}
+		}
+		commencement =0;
+		tour++;
+	}while(tour!=1);
+	printf("\n");
+	return 1;
 }
 
 int main(){
@@ -313,15 +471,15 @@ int main(){
 
 	srand(time(NULL));
 	
+	lire_fichier();
 	init_matrice();
-	
 	premier_mot();
 	afficher_matrice();
 
 
 
 	
-	
+	/*
 	do{
 	printf("veuillez saisir l'adresse du DEBUT en commencent par le numéro de ligne puis le numéro de colonne : ");
 	scanf("%i%i",&deb1,&deb2);
@@ -342,6 +500,6 @@ int main(){
 		printf("%c",a);
 	}
 	printf("\n");
-	
+	*/
 }
 
