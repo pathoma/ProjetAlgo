@@ -1,7 +1,14 @@
-programme: generation.o mot.o 
-	gcc  mot.o generation.o -o programme
+generateur: direction.o generateur.o mot.o outil.o
+	gcc direction.o outil.o mot.o generateur.o -o generateur
+
+direction.o:direction.c
+	gcc -c direction.c
+
+outil.o: outil.c
+	gcc -c outil.c
+	
 mot.o: mot.c
 	gcc -c mot.c
 
-generation.o: generation.c
-	gcc -c generation.c
+generateur.o: generateur.c
+	gcc -c generateur.c
