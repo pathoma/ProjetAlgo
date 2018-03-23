@@ -9,8 +9,14 @@
 char mat[N][M];
 char mot[100];
 char trouver[20];
-
+const char LIBRE ='0';
 int PlacerMot(int coordX,int coordY, char * motmis,int dirmotmis);
+
+int coord_valides(int x, int y){
+
+	return (x>0 && y>0 && x<N && y<M);
+
+}
 
 void inversion(void){
 	
@@ -97,17 +103,119 @@ void afficher_matrice(void){
 	}
 }
 
-
-int inserer(int i1,int j1,int direction,int T){
+//inserer mot à partir de (i1, j1) dans la direction direction
+//les verification sont faites avant
+int inserer(char * mot,int i,int j,int direction){
 	
 	int fin=0;
 	int fin2=0;
-	int i,j;
+	//int i,j;
+	int T=strlen(mot);
 	
 	/*printf("début inséré \n");
 	printf("direction : %i , i1 = %i , j1 = %i  \n",direction,i1,j1);*/
 
-	while(fin2!=1){
+	//pour chaque lettre de mot
+	for(int l=0; l<T; l++){
+	// placer la lettre en i,j
+		mat[i][j]=mot[l];
+	// se déplacer d'un pas dans la direction  direction
+		dir_pas_suivant(i, j , 1, direction, &i, &j);
+	}
+
+	return direction;
+}
+	
+
+void ajoutnonaleatoire(void){
+	int i1=13,j1=13;
+	inserer( "bonjour", 13,13,7);
+	//char * motaenvoyer=mot;
+	PlacerMot(i1,j1,mot,dir_convert_to_direc(7));
+}
+
+int mot_trouver(int i1,int j1,int i2,int j2){
+	
+	int i;
+	int taille;
+	
+
+	if(i1==i2&&j1<j2){              	//horizontal à l'endroit 3
+		
+		taille=(j2-j1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1][j1+i];
+		}
+		return taille;
+	}
+	
+	
+	if(i1==i2&&j1>j2){              	//horizontal à l'envers 7
+		
+		taille=(j1-j2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1][j1-i];
+		}
+		return taille;
+	}
+	
+	else if(j1==j2&&i1<i2){		//vertical haut bas 5
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1];
+		}
+		return taille;
+	}
+	
+	else if(j1==j2&&i2<i1){		//vertical bas haut 1
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1-i][j1];
+		}
+		return taille;
+	}
+
+	else if(i2>i1&&j2>j1){		//diagonal bas droite 4
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1+i];
+		}
+		return taille;
+	}
+
+	else if(i1>i2&&j1>j2){		//diagonal haut gauche 8
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1-i][j1-i];
+		}
+		return taille;
+	}
+	
+	else if(i2>i1&&j1>j2){		//diagonal bas gauche 6
+		taille=(i2-i1)+1;
+		for(i=0;i<=taille;i++){
+			trouver[i]=mat[i1+i][j1-i];
+		}
+		return taille;
+	}
+
+	else if(i1>i2&&j2>j1){		//diagonal haut droit 2
+		taille=(i1-i2)+1;
+		for(i=0;i<=taille;i++){
+			mot[i]=mat[i1-i][j1+i];
+		}
+		return taille;
+	}
+	
+}
+	
+	
+int insert_premier_mot(char * mot,int i1,int j1,int direction){
+	int fin=0;
+	int fin2=0;
+	int i,j;
+	int T=strlen(mot);
+while(fin2!=1){
 		
 		while(fin!=1){
 			
@@ -196,99 +304,12 @@ int inserer(int i1,int j1,int direction,int T){
 		direction=direction+1;
 		if(direction==9) direction=1;
 		printf("direction++\n");
-	}
-	return direction;
+		}
+		return direction;
+
 }
-	
-
-void ajoutnonaleatoire(void){
-	int i1=13,j1=13;
-	inserer( 13,14,7,6);
-	char * motaenvoyer=mot;
-	PlacerMot(i1,j1,motaenvoyer,dir_convert_to_direc(7));
-}
-
-int mot_trouver(int i1,int j1,int i2,int j2){
-	
-	int i;
-	int taille;
-	
-
-	if(i1==i2&&j1<j2){              	//horizontal à l'endroit 3
-		
-		taille=(j2-j1)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1][j1+i];
-		}
-		return taille;
-	}
-	
-	
-	if(i1==i2&&j1>j2){              	//horizontal à l'envers 7
-		
-		taille=(j1-j2)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1][j1-i];
-		}
-		return taille;
-	}
-	
-	else if(j1==j2&&i1<i2){		//vertical haut bas 5
-		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1+i][j1];
-		}
-		return taille;
-	}
-	
-	else if(j1==j2&&i2<i1){		//vertical bas haut 1
-		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1-i][j1];
-		}
-		return taille;
-	}
-
-	else if(i2>i1&&j2>j1){		//diagonal bas droite 4
-		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1+i][j1+i];
-		}
-		return taille;
-	}
-
-	else if(i1>i2&&j1>j2){		//diagonal haut gauche 8
-		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1-i][j1-i];
-		}
-		return taille;
-	}
-	
-	else if(i2>i1&&j1>j2){		//diagonal bas gauche 6
-		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
-			trouver[i]=mat[i1+i][j1-i];
-		}
-		return taille;
-	}
-
-	else if(i1>i2&&j2>j1){		//diagonal haut droit 2
-		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
-			mot[i]=mat[i1-i][j1+i];
-		}
-		return taille;
-	}
-	
-}
-	
-	
-
 
 void premier_mot(){
-	
-
 	
 	int i1,j1,i,j,T;
 	i1=rand()%N;
@@ -301,10 +322,10 @@ void premier_mot(){
 	T=strlen(mot);
 	
 	
-	printf("T : %i \n",T);
-	direction=inserer(i1,j1,direction,T);
-	char * motaenvoyer=mot;
-	PlacerMot(i1,j1,motaenvoyer,dir_convert_to_direc(direction));
+	fprintf(stderr, "T : %i \n",T);
+	direction=insert_premier_mot("bonjour", i1, j1, direction);
+	//char * motaenvoyer=mot;
+	PlacerMot(i1,j1,"bonjour",dir_convert_to_direc(direction));
 }
 int parcours_libre(int coordX,int coordY,int direction)
 {
@@ -345,11 +366,14 @@ int parcours_libre(int coordX,int coordY,int direction)
 	}
 	coordX += compteur1;
 	coordY += compteur2;
+	
+	
 
 	char lettre='0';
-	while (lettre == '0' && coordX<15 && coordX>0 && coordY<15  && coordY>0)
+//	while (lettre == '0' && coordX<15 && coordX>0 && coordY<15  && coordY>0)
+	while (lettre == LIBRE && coord_valides(coordX, coordY) )
 	{
-		if(mat[coordX][coordY]=='0')
+		if(mat[coordX][coordY]==LIBRE) //case libre
 		{
 				nbprochainelettre++;
 				//lettre= mat[coordX+compteur][coordY+compteur2];
@@ -357,8 +381,9 @@ int parcours_libre(int coordX,int coordY,int direction)
 		else{
 			lettre=mat[coordX][coordY];
 		}
-		coordX += compteur1;
-		coordY += compteur2;	
+		//coordX += compteur1;
+		//coordY += compteur2;	
+		dir_pas_suivant(coordX, coordY ,1 , direction, &coordX, &coordY);
 	}
 	
 	return nbprochainelettre;
@@ -372,48 +397,55 @@ int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 	//int commencement= rand()%15;
 	int commencement= 0;
 	int tailleavantlettre=0;
-	int direc=rand()%8+1;
-	t_direction direction=dir_convert_to_direc(direc);
+	
+	//int direc=rand()%8+1;
+	//t_direction direction=dir_convert_to_direc(direc);
+	
+	t_direction direction=dir_aleatoire();
+	
 	do	
 	{	
+	//pour tout les mots de la liste
 		for (int i=commencement;i<nbmot; i++)
 		{
 			char * motrecup=recup_mot(i);
 			tailleavantlettre=0;
-			
+			//pour toutes les lettres du mot de la liste
 			for (int j=0;j<taille_mot(i); j++)
 			{
 				printf("\n %s ", motrecup);
+				//pour toutes les lettres du mot en paramètres (mot deja dans la matrice)
 				for (int a=0;a<taille_motmis;a++)
 				{
-					if(motrecup[j]==motmis[a])
+					if(motrecup[j] == motmis[a])
 					{
-						printf("lettre de bonjour : %c : lettre du mot:%c \n",motmis[a],motrecup[j]); 
+						fprintf(stderr, " motmis : %s ; motrecup:%s \n",motmis,motrecup); 
+						fprintf(stderr, "lettre de motmis : %c : lettre du motrecup:%c \n",motmis[a],motrecup[j]); 
+						compteur =0;
 						do{	
-						int coord2X;
-						int coord2Y;
-						dir_pas_suivant(coordX,coordY,a,direction,&coord2X,&coord2Y);
-						printf("\ncoordX : %i coordY : %i\n",coord2X,coord2Y);
+							int coord2X;
+							int coord2Y;
+							dir_pas_suivant(coordX,coordY,a,direction,&coord2X,&coord2Y);
+							fprintf(stderr, "\ncoord2X : %i coord2Y : %i\n",coord2X,coord2Y);
+						
+							// si on a la place pour mettre le mot
 							if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
 							{
-								for (int x=0; x<taille_mot(i);x++)
-								{
-									mot[x]=motrecup[x];
-								}
-								
 								printf("lettre: %c \n", mot[tailleavantlettre] );
 								printf(" avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
 								
 								// on va dans la direction inverse de direction
 								// nombre de pas = tailleavantlettre
 								int x, y;
-								dir_pas_suivant(coordX, coordY, dir_inverse(direction), tailleavantlettre, &x, &y);
-								if( x>N && y>N)
+								dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
+								// si (x,y) sont des coordonnées valides
+								if( coord_valides(x,y) )
 								{
-									printf(" apres X:%i, Y%i,direction:%s \n",x,y,dir_affiche(direction));
+									fprintf(stderr, " on place le mot en X:%i, Y%i, direction:%s \n",x,y,dir_affiche(direction));
 								
-								
-									inserer(x,y,dir_convert_to_int(direction),taille_mot(i));
+									// on insere mot_recup à partir de (x,y) dans la direction direction
+									inserer(motrecup, x,y, dir_convert_to_int(direction));
+									supprime_mot(i);
 									compteur =8;
 									printf("\n");	
 									return 0;
@@ -421,6 +453,7 @@ int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 							}
 							else /* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
 							{
+								fprintf(stderr, "pas la place pour %s dans la direction %s !\n", motrecup, dir_affiche(direction));
 								direction=dir_suivant(direction);
 								compteur++;
 					
@@ -444,18 +477,13 @@ int main(){
 	int deb1,deb2,fin1,fin2;	
 	char a;
 	
-	mot[0]='b';
-	mot[1]='o';
-	mot[2]='n';
-	mot[3]='j';
-	mot[4]='o';
-	mot[5]='u';
-	mot[6]='r';
+	strcpy(mot, "bonjour");
 
 	srand(time(NULL));
 	
 	lire_fichier();
 	init_matrice();
+	
 	ajoutnonaleatoire();
 	afficher_matrice();
 	printf(" \n\n\n%i\n\n\n",parcours_libre(13,13,NO));
