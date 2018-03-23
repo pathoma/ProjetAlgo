@@ -4,6 +4,14 @@
 #include<time.h>
 #include"direction.h"
 
+
+extern t_direction dir_aleatoire(){
+
+	int direc=rand()%8+1;
+	return dir_convert_to_direc(direc);
+}
+
+
 extern t_direction dir_inverse(t_direction direction){
 	for(int i=0;i<4;i++)
 	{
@@ -112,7 +120,11 @@ extern t_direction dir_convert_to_direc(int x){
 }
 extern int dir_convert_to_int(t_direction x){
 	int direc;
-	switch (x)
+	
+	if(x<0 || x >8) return -1;
+	return (int) x;
+	
+	/*switch (x)
 	{
 		case N:
 			direc= 1;
@@ -139,13 +151,19 @@ extern int dir_convert_to_int(t_direction x){
 			direc= 8;
 			break;
 	}	
-	return direc;
+	return direc;*/
 }
 
 extern char * dir_affiche(t_direction direction){
-
-return(nom_direc[direction]);
-
+	return(nom_direc[direction-1]);
 }
+
+
+
+
+
+
+
+
 
 
