@@ -3,14 +3,14 @@
 #include<string.h>
 #include<time.h>
 #include"mot.h"
-
+#include"direction.h"
 #define N 15
 #define M 15
 char mat[N][M];
 char mot[100];
 char trouver[20];
 
-int PlacerMot(int coordX,int coordY, char * motmis);
+int PlacerMot(int coordX,int coordY, char * motmis,int dirmotmis);
 
 void inversion(void){
 	
@@ -61,8 +61,6 @@ void init_matrice(void){
 }
 
 
-
-
 void afficher_matrice(void){
 	int i;
 	int j;
@@ -100,14 +98,14 @@ void afficher_matrice(void){
 }
 
 
-void inserer(int i1,int j1,int direction,int T){
+int inserer(int i1,int j1,int direction,int T){
 	
 	int fin=0;
 	int fin2=0;
 	int i,j;
 	
-	printf("début inséré \n");
-	printf("direction : %i , i1 = %i , j1 = %i  \n",direction,i1,j1);
+	/*printf("début inséré \n");
+	printf("direction : %i , i1 = %i , j1 = %i  \n",direction,i1,j1);*/
 
 	while(fin2!=1){
 		
@@ -199,9 +197,16 @@ void inserer(int i1,int j1,int direction,int T){
 		if(direction==9) direction=1;
 		printf("direction++\n");
 	}
+	return direction;
 }
 	
 
+void ajoutnonaleatoire(void){
+	int i1=13,j1=13;
+	inserer( 13,14,7,6);
+	char * motaenvoyer=mot;
+	PlacerMot(i1,j1,motaenvoyer,dir_convert_to_direc(7));
+}
 
 int mot_trouver(int i1,int j1,int i2,int j2){
 	
@@ -297,9 +302,9 @@ void premier_mot(){
 	
 	
 	printf("T : %i \n",T);
-	inserer(i1,j1,direction,T);
+	direction=inserer(i1,j1,direction,T);
 	char * motaenvoyer=mot;
-	PlacerMot(i1,j1,motaenvoyer);
+	PlacerMot(i1,j1,motaenvoyer,dir_convert_to_direc(direction));
 }
 int parcours_libre(int coordX,int coordY,int direction)
 {
@@ -308,34 +313,34 @@ int parcours_libre(int coordX,int coordY,int direction)
 	int compteur2=0;
 	switch (direction)
 	{
-	case 1:
-		compteur2=-1;
-		break;
-	case 2:
-		compteur1=1;
-		compteur2=-1;
-		break;
-	case 3:
-		compteur1=1;
-		break;
-	case 4:
-		compteur1=1;
-		compteur2=1;
-		break;
-	case 5:
-		compteur2=1;
-		break;
-	case 6:
+	case N:
 		compteur1=-1;
+		break;
+	case NE:
 		compteur2=1;
+		compteur1=-1;
+		break;
+	case E:
+		compteur2=1;
+		break;
+	case SE:
+		compteur2=1;
+		compteur1=1;
+		break;
+	case S:
+		compteur1=1;
+		break;
+	case SO:
+		compteur2=-1;
+		compteur1=1;
 	  break;
-	  case 7:
-	  	  compteur1=-1;
-		compteur2= 0;
+	  case O:
+	  	  compteur2=-1;
+		compteur1= 0;
 	  break;
 	default:
-		compteur1=-1;
 		compteur2=-1;
+		compteur1=-1;
 		break;
 	}
 	coordX += compteur1;
@@ -344,13 +349,13 @@ int parcours_libre(int coordX,int coordY,int direction)
 	char lettre='0';
 	while (lettre == '0' && coordX<15 && coordX>0 && coordY<15  && coordY>0)
 	{
-		if(mat[coordX+compteur1][coordY+compteur2]=='0')
+		if(mat[coordX][coordY]=='0')
 		{
 				nbprochainelettre++;
 				//lettre= mat[coordX+compteur][coordY+compteur2];
 		}
 		else{
-			lettre=mat[coordX+compteur1][coordY+compteur2];
+			lettre=mat[coordX][coordY];
 		}
 		coordX += compteur1;
 		coordY += compteur2;	
@@ -359,20 +364,16 @@ int parcours_libre(int coordX,int coordY,int direction)
 	return nbprochainelettre;
 }
 
-int PlacerMot(int coordX,int coordY, char * motmis)
-{	/*mot[0]='b';
-	mot[1]='a';
-	mot[2]='l';
-	mot[3]='l';
-	mot[4]='e';*/
-	printf("enter dans placer mot : %s #\n",motmis);
+int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
+{
 	int taille_motmis=strlen(motmis);
 	int tour =0;
 	int compteur =0;
-	int commencement= rand()%15;
+	//int commencement= rand()%15;
+	int commencement= 0;
 	int tailleavantlettre=0;
-	int direction=rand()%8+1;
-	int directinverse=direction+4%8;
+	int direc=rand()%8+1;
+	t_direction direction=dir_convert_to_direc(direc);
 	do	
 	{	
 		for (int i=commencement;i<nbmot; i++)
@@ -382,71 +383,53 @@ int PlacerMot(int coordX,int coordY, char * motmis)
 			
 			for (int j=0;j<taille_mot(i); j++)
 			{
-				printf("%s : %s \n",motmis, motrecup);
+				printf("\n %s ", motrecup);
 				for (int a=0;a<taille_motmis;a++)
 				{
 					if(motrecup[j]==motmis[a])
 					{
+						printf("lettre de bonjour : %c : lettre du mot:%c \n",motmis[a],motrecup[j]); 
 						do{	
-							if(parcours_libre(coordX,coordY,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coordX,coordY,directinverse)>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
+						int coord2X;
+						int coord2Y;
+						dir_pas_suivant(coordX,coordY,a,direction,&coord2X,&coord2Y);
+						printf("\ncoordX : %i coordY : %i\n",coord2X,coord2Y);
+							if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
 							{
 								for (int x=0; x<taille_mot(i);x++)
 								{
 									mot[x]=motrecup[x];
 								}
-								switch (direction)
+								
+								printf("lettre: %c \n", mot[tailleavantlettre] );
+								printf(" avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
+								
+								// on va dans la direction inverse de direction
+								// nombre de pas = tailleavantlettre
+								int x, y;
+								dir_pas_suivant(coordX, coordY, dir_inverse(direction), tailleavantlettre, &x, &y);
+								if( x>N && y>N)
 								{
-								case 1:
-									coordY+=tailleavantlettre;
-									break;
-								case 2:
-									coordX+=tailleavantlettre;
-									coordY-=tailleavantlettre;
-									break;
-								case 3:
-									coordX-=tailleavantlettre;
-									break;
-								case 4:
-									coordX-=tailleavantlettre;
-									coordY-=tailleavantlettre;
-									break;
-								case 5:
-									coordY-=tailleavantlettre;
-									break;
-								case 6:
-									coordX-=tailleavantlettre;
-									coordY+=tailleavantlettre;
-								  break;
-								  case 7:
-									coordX+=tailleavantlettre;
-								  break;
-								default:
-									coordX+=tailleavantlettre;
-									coordY+=tailleavantlettre;
-									break;
-								}	
-								inserer(coordX,coordY,direction,taille_mot(i));
-								compteur =8;
-								printf("\n");	
-							return 0;
+									printf(" apres X:%i, Y%i,direction:%s \n",x,y,dir_affiche(direction));
+								
+								
+									inserer(x,y,dir_convert_to_int(direction),taille_mot(i));
+									compteur =8;
+									printf("\n");	
+									return 0;
+								}
 							}
 							else /* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
 							{
-								if(direction==8)
-								{
-									direction=1;
-								}
-								else
-									direction++;
-									directinverse=direction+4%8;
-									compteur++;
+								direction=dir_suivant(direction);
+								compteur++;
 					
-							}
+							}  
 						}while(compteur<8);
-				
 					}
+				tailleavantlettre++;	
 				}
-				tailleavantlettre++;
+
 			}
 		}
 		commencement =0;
@@ -473,9 +456,10 @@ int main(){
 	
 	lire_fichier();
 	init_matrice();
-	premier_mot();
+	ajoutnonaleatoire();
 	afficher_matrice();
-
+	printf(" \n\n\n%i\n\n\n",parcours_libre(13,13,NO));
+	
 
 
 	
