@@ -11,7 +11,7 @@ char mot[100];
 char trouver[20];
 const char LIBRE ='0';
 int PlacerMot(int coordX,int coordY, char * motmis,int dirmotmis);
-
+int Placerlibre(void);
 int coord_valides(int x, int y){
 
 	return (x>0 && y>0 && x<N && y<M);
@@ -105,7 +105,7 @@ void afficher_matrice(void){
 
 //inserer mot à partir de (i1, j1) dans la direction direction
 //les verification sont faites avant
-int inserer(char * mot,int i,int j,int direction){
+int inserer(char * mot,int i,int j,t_direction direction){
 	
 	int fin=0;
 	int fin2=0;
@@ -131,7 +131,8 @@ void ajoutnonaleatoire(void){
 	int i1=13,j1=13;
 	inserer( "bonjour", i1,j1,7);
 	//char * motaenvoyer=mot;
-	PlacerMot(i1,j1,mot,dir_convert_to_direc(7));
+	//PlacerMot(i1,j1,mot,dir_convert_to_direc(7));
+	 Placerlibre();
 }
 
 int mot_trouver(int i1,int j1,int i2,int j2){
@@ -206,10 +207,10 @@ int mot_trouver(int i1,int j1,int i2,int j2){
 		}
 		return taille;
 	}
-	
+	return 0;
 }
 	
-	
+	 
 int insert_premier_mot(char * mot,int i1,int j1,int direction){
 	int fin=0;
 	int fin2=0;
@@ -333,9 +334,9 @@ int parcours_libre(int coordX,int coordY,t_direction direction)
 	dir_pas_suivant(coordX, coordY ,1 , direction, &coordX, &coordY);
 	int nbprochainelettre = 0;
 	char lettre='0';
-	while (lettre == LIBRE && coord_valides(coordX, coordY) )
+	while (lettre == '0' && coord_valides(coordX, coordY) )
 	{
-		if(mat[coordX][coordY]==LIBRE) //case libre
+		if(mat[coordX][coordY]=='0') //case libre
 		{
 				nbprochainelettre++;
 		}
@@ -349,6 +350,54 @@ int parcours_libre(int coordX,int coordY,t_direction direction)
 	
 	return nbprochainelettre;
 }
+int Placerlibre(void)
+{
+	t_direction dir;
+	int taille_max;
+	fprintf(stderr,"pour toutes les cases\n");
+	for (int i=1;i<N;i++)
+	{
+		taille_max=0;
+		t_direction dir=dir_aleatoire();
+		t_direction dir_final;
+		for (int j=0;j<N;j++)
+		{
+		taille_max=0;
+		dir=dir_aleatoire();
+			fprintf(stderr,"pour la cases i: %i j: %i \n",i,j);
+			for(int d=1; d<9;d++)
+			{
+				if(taille_max<parcours_libre(i,j,dir))
+				{
+				taille_max=parcours_libre(i,j,dir);
+				dir_final=dir;
+				}
+				fprintf(stderr,"on est en %s la taille max est : %i\n",dir_affiche(dir),taille_max );
+				dir=dir_suivant(dir);
+				d++;
+			}
+			fprintf(stderr,"on regarde la taille max \n");
+			fprintf(stderr,"verification de l'endroit avec i=%i et j=%i parcourlibre= %i avec la direction : %s\n",i,j,parcours_libre(i,j,dir_final),dir_affiche(dir_final));
+			while(taille_max>2)
+			{
+				for (int i=0;i<nbmot; i++)
+				{
+					if(taille_mot(i)==taille_max)
+					{
+						char * mot=recup_mot(i); 
+						inserer(mot,i,j,dir_final);
+						fprintf(stderr,"le mot %s ",recup_mot(i));
+						fprintf(stderr,"on insert le mot dans la matrice \n");
+						return 0;
+					}
+				}
+				taille_max--;
+			}
+		}
+	}
+	return 1;
+
+}
 
 int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 {
@@ -358,10 +407,6 @@ int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 	//int commencement= rand()%15;
 	int commencement= 0;
 	int tailleavantlettre=0;
-	
-	//int direc=rand()%8+1;
-	//t_direction direction=dir_convert_to_direc(direc);
-	
 	t_direction direction=dir_aleatoire();
 	
 	do	
@@ -388,32 +433,37 @@ int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 							int coord2Y;
 							dir_pas_suivant(coordX,coordY,a,direction,&coord2X,&coord2Y);
 							fprintf(stderr, "\ncoord2X : %i coord2Y : %i\n",coord2X,coord2Y);
-							// si on a la place pour mettre le mot
-							if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
+							//si les coordonnées (coord2X,coord2Y) sont valides
+							if(coord_valides(coord2X,coord2Y))
 							{
-								fprintf(stderr,"lettre: %c \n", mot[tailleavantlettre] );
-								fprintf(stderr," avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
-								
-								// on va dans la direction inverse de direction
-								// nombre de pas = tailleavantlettre
-								int x, y;
-								dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
-								// si (x,y) sont des coordonnées valides
-								if( coord_valides(x,y) )
+							// si on a la place pour mettre le mot
+								if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
 								{
-									fprintf(stderr, " on place le mot en X:%i, Y%i, direction:%s \n",x,y,dir_affiche(direction));
+									fprintf(stderr,"lettre: %c \n", mot[tailleavantlettre] );
+									fprintf(stderr," avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
 								
-									// on insere mot_recup à partir de (x,y) dans la direction direction
-									inserer(motrecup, x,y, dir_convert_to_int(direction));
-									supprime_mot(i);
-									compteur =8;
-									printf("\n");	
-									return 0;
+									// on va dans la direction inverse de direction
+									// nombre de pas = tailleavantlettre
+									int x, y;
+									dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
+									
+										fprintf(stderr, " on place le mot en X:%i, Y%i, direction:%s \n",x,y,dir_affiche(direction));
+								
+										// on insere mot_recup à partir de (x,y) dans la direction direction
+										inserer(motrecup, x,y,direction);
+										supprime_mot(i);
+										compteur = 8;
+										printf("\n");	
+										return 0;
+										
+								}else{ /* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
+								fprintf(stderr, "pas la place pour %s dans la direction %s !\n", motrecup, dir_affiche(direction));
+								direction=dir_suivant(direction);
+								compteur++;
 								}
 							}
-							else /* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
-							{
-								fprintf(stderr, "pas la place pour %s dans la direction %s !\n", motrecup, dir_affiche(direction));
+							else { // la dimension de la matrice n'est pas respecter
+							fprintf(stderr,"on ne peut pas le mettre dans des coordonnées valides\n" );
 								direction=dir_suivant(direction);
 								compteur++;
 					
