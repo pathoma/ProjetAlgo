@@ -5,39 +5,37 @@
 
 #define N 15
 #define M 15
-char mat[N][M];
-char mot[100];
-char trouver[20];
 
-void inversion(void){
+char mat[N][M];
+
+
+// Fonction qui prend le mot l'inverse et retourne son inverse
+char* inversion(char*mot){
 	
+	printf("début inversion \n");
 	printf("mot : %s \n",mot);
 	
 	int i,T;
 	T=strlen(mot);
 	
-	char inverse[T];
+	char * inverse = malloc(20 * sizeof(char));	// Variable tempo pour stocker l'inverse 
 
 	for(i=0;i<T;i++){
 		inverse[i]=mot[T-1-i];	
 	}
 	inverse[T] = '\0';
-	
-	/*for(i=0;i<T;i++){
-		mot[i]=inverse[i];
-	}*/
-	
-	strcpy(mot, inverse);
-	
+
 	
 	printf("inverse : %s \n",inverse);
 	printf("mot : %s \n",mot);
 	printf("FIN\n");
+
+	return inverse;
 }
 
 
-
-void init_matrice(void){
+//Fonction initialisant toutes les cases de la matrice avec le caractère '0'
+void init_matrice(void){	
 	int i;
 	int j;
 	for(i=0;i<N;i++){
@@ -59,7 +57,7 @@ void init_matrice(void){
 
 
 
-
+//Fonction affichant la matrice avec un repère allant de 0 à N-1 sur le côté gauche et de 0 à M-1 sur le dessus
 void afficher_matrice(void){
 	int i;
 	int j;
@@ -96,12 +94,13 @@ void afficher_matrice(void){
 	}
 }
 
-
-void inserer(int i1,int j1,int direction,int T){
+// insertion du mot "mot" à partir de (i1,j1) dans la direction "direction"
+void insert_premier(const char*mot,int i1,int j1,int direction){
 	
 	int fin=0;
 	int fin2=0;
 	int i,j;
+	int T=strlen(mot);
 	
 	printf("début inséré \n");
 	printf("direction : %i , i1 = %i , j1 = %i  \n",direction,i1,j1);
@@ -118,6 +117,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -128,6 +128,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -138,6 +139,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -148,6 +150,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -158,6 +161,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -168,6 +172,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -178,6 +183,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 			
@@ -188,6 +194,7 @@ void inserer(int i1,int j1,int direction,int T){
 					}
 					fin=1;
 					fin2=1;
+					printf("direction final : %i\n",direction);
 				} else fin=1;
 			}
 		}
@@ -200,77 +207,86 @@ void inserer(int i1,int j1,int direction,int T){
 	
 
 
-int mot_trouver(int i1,int j1,int i2,int j2){
+char* mot_trouver(int i1,int j1,int i2,int j2){
 	
 	int i;
 	int taille;
+	char * trouver = malloc(20 * sizeof(char));
 	
 
-	if(i1==i2&&j1<j2){              	//horizontal à l'endroit 3
+	if(i1==i2&&j1<j2){              	//E
 		
 		taille=(j2-j1)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1][j1+i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 	
 	
-	if(i1==i2&&j1>j2){              	//horizontal à l'envers 7
+	if(i1==i2&&j1>j2){              	//O
 		
 		taille=(j1-j2)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1][j1-i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 	
-	else if(j1==j2&&i1<i2){		//vertical haut bas 5
+	else if(j1==j2&&i1<i2){		//S
 		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1+i][j1];
 		}
-		return taille;
+		
+		return trouver;
 	}
 	
-	else if(j1==j2&&i2<i1){		//vertical bas haut 1
+	else if(j1==j2&&i2<i1){		//N
 		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1-i][j1];
 		}
-		return taille;
+		
+		return trouver;
 	}
 
-	else if(i2>i1&&j2>j1){		//diagonal bas droite 4
+	else if(i2>i1&&j2>j1){		//SE
 		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1+i][j1+i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 
-	else if(i1>i2&&j1>j2){		//diagonal haut gauche 8
+	else if(i1>i2&&j1>j2){		//NO
 		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1-i][j1-i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 	
-	else if(i2>i1&&j1>j2){		//diagonal bas gauche 6
+	else if(i2>i1&&j1>j2){		//SO
 		taille=(i2-i1)+1;
-		for(i=0;i<=taille;i++){
+		for(i=0;i<taille;i++){
 			trouver[i]=mat[i1+i][j1-i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 
-	else if(i1>i2&&j2>j1){		//diagonal haut droit 2
+	else if(i1>i2&&j2>j1){		//NE
 		taille=(i1-i2)+1;
-		for(i=0;i<=taille;i++){
-			mot[i]=mat[i1-i][j1+i];
+		for(i=0;i<taille;i++){
+			trouver[i]=mat[i1-i][j1+i];
 		}
-		return taille;
+		
+		return trouver;
 	}
 	
 }
@@ -278,7 +294,7 @@ int mot_trouver(int i1,int j1,int i2,int j2){
 	
 
 
-void premier_mot(){
+void premier_mot(char*mot){
 	
 
 	
@@ -287,27 +303,29 @@ void premier_mot(){
 	j1=rand()%M;
 	
 	int sens = rand()%2+1;
-	if(sens==1) inversion();
+	if(sens==1) inversion(mot);
 	
 	int direction = rand()%8+1;
-	T=strlen(mot);
-	
-	
-	printf("T : %i \n",T);
-	inserer(i1,j1,direction,T);
+
+	insert_premier(mot,i1,j1,direction);
 
 }
 
-int verification(int taille){
-	
-	int i=0;
-	int condi;
+int verification(char*mot,char*trouver){
 
-	for(i=0;i<=taille;i++){
+	int taille=strlen(mot);
+	int i=0;
+	int condi=0;
+
+	printf("motVerif : %s \n",mot);
+	printf("trouver Verif : %s \n",trouver);
+
+	for(i=0;i<taille;i++){
 		if(mot[i]!=trouver[i]){
 			condi=1;
 			i=taille;
 		}
+		printf("%i %c %c \n",i,mot[i],trouver[i]);
 	} 
 	
 	if(condi=1){
@@ -315,6 +333,7 @@ int verification(int taille){
 			if(mot[i]!=trouver[i]) return 0;
 		}
 	} else return 1;
+	return 1;
 }
 	
 
@@ -323,22 +342,16 @@ int main(){
 	int deb1,deb2,fin1,fin2;	
 	char a;
 	
-	mot[0]='b';
-	mot[1]='o';
-	mot[2]='n';
-	mot[3]='j';
-	mot[4]='o';
-	mot[5]='u';
-	mot[6]='r';
-
+	char* mot="bonjour";
+	char* trouver;
 	srand(time(NULL));
 	
 	init_matrice();
 	
-	premier_mot();
+	premier_mot(mot);
 	afficher_matrice();
 
-
+	
 
 	
 	
@@ -354,15 +367,13 @@ int main(){
 	}while(fin1>=15||fin2>=15||fin1<0||fin2<0);
 
 
-	taille=mot_trouver(deb1,deb2,fin1,fin2);
+	trouver=mot_trouver(deb1,deb2,fin1,fin2);
+
+	printf("\n");
 	
+	printf("%s",trouver);
 	printf("\n");
-	for(int i=0;i<taille;i++){
-		a=trouver[i];
-		printf("%c",a);
-	}
-	printf("\n");
-	if(verification(taille)==1) printf("bien joué, vous avez trouvé un mot");
+	if(verification(mot,trouver)==1) printf("bien joué, vous avez trouvé un mot");
 	else printf("looser ce n'est pas le bon mot \n");
 	
 }
