@@ -129,7 +129,7 @@ int inserer(char * mot,int i,int j,int direction){
 
 void ajoutnonaleatoire(void){
 	int i1=13,j1=13;
-	inserer( "bonjour", 13,13,7);
+	inserer( "bonjour", i1,j1,7);
 	//char * motaenvoyer=mot;
 	PlacerMot(i1,j1,mot,dir_convert_to_direc(7));
 }
@@ -327,56 +327,17 @@ void premier_mot(){
 	//char * motaenvoyer=mot;
 	PlacerMot(i1,j1,"bonjour",dir_convert_to_direc(direction));
 }
-int parcours_libre(int coordX,int coordY,int direction)
-{
-	int nbprochainelettre =0;
-	int compteur1=0;
-	int compteur2=0;
-	switch (direction)
-	{
-	case N:
-		compteur1=-1;
-		break;
-	case NE:
-		compteur2=1;
-		compteur1=-1;
-		break;
-	case E:
-		compteur2=1;
-		break;
-	case SE:
-		compteur2=1;
-		compteur1=1;
-		break;
-	case S:
-		compteur1=1;
-		break;
-	case SO:
-		compteur2=-1;
-		compteur1=1;
-	  break;
-	  case O:
-	  	  compteur2=-1;
-		compteur1= 0;
-	  break;
-	default:
-		compteur2=-1;
-		compteur1=-1;
-		break;
-	}
-	coordX += compteur1;
-	coordY += compteur2;
-	
-	
 
+int parcours_libre(int coordX,int coordY,t_direction direction)
+{ 
+	dir_pas_suivant(coordX, coordY ,1 , direction, &coordX, &coordY);
+	int nbprochainelettre = 0;
 	char lettre='0';
-//	while (lettre == '0' && coordX<15 && coordX>0 && coordY<15  && coordY>0)
 	while (lettre == LIBRE && coord_valides(coordX, coordY) )
 	{
 		if(mat[coordX][coordY]==LIBRE) //case libre
 		{
 				nbprochainelettre++;
-				//lettre= mat[coordX+compteur][coordY+compteur2];
 		}
 		else{
 			lettre=mat[coordX][coordY];
@@ -427,12 +388,11 @@ int PlacerMot(int coordX,int coordY, char * motmis, int dirmotmis)
 							int coord2Y;
 							dir_pas_suivant(coordX,coordY,a,direction,&coord2X,&coord2Y);
 							fprintf(stderr, "\ncoord2X : %i coord2Y : %i\n",coord2X,coord2Y);
-						
 							// si on a la place pour mettre le mot
 							if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>(taille_mot(i)-(taille_mot(i)-tailleavantlettre)))
 							{
-								printf("lettre: %c \n", mot[tailleavantlettre] );
-								printf(" avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
+								fprintf(stderr,"lettre: %c \n", mot[tailleavantlettre] );
+								fprintf(stderr," avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,coordX,coordY,dir_affiche(direction));
 								
 								// on va dans la direction inverse de direction
 								// nombre de pas = tailleavantlettre
@@ -483,10 +443,8 @@ int main(){
 	
 	lire_fichier();
 	init_matrice();
-	
 	ajoutnonaleatoire();
 	afficher_matrice();
-	printf(" \n\n\n%i\n\n\n",parcours_libre(13,13,NO));
 	
 
 
