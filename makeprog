@@ -1,14 +1,18 @@
-generateur: direction.o generateur.o mot.o outil.o
-	gcc direction.o outil.o mot.o generateur.o -o generateur
+generateur: direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o 
+	gcc direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o -o generateur
 
 direction.o:direction.c
 	gcc -c direction.c
-
+	
+mot_mat.o:mot_mat.c
+	gcc -c mot_mat.c
+	
 outil.o: outil.c
 	gcc -c outil.c
 	
 mot.o: mot.c
 	gcc -c mot.c
-
+premier_saisie.o: premier_saisie.c
+	gcc -c premier_saisie.c
 generateur.o: generateur.c
 	gcc -c generateur.c
