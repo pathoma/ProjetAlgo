@@ -4,8 +4,10 @@
 #define N 15
 #define M 15
 char mat[N][M];
+
 char* listeMot[50];
-int nbliste;
+int nbliste=0; 
+
 // Fonction qui prend le mot l'inverse et retourne son inverse
 char* inversion(char*mot){
 	
@@ -199,7 +201,12 @@ int saisie(){
 			listeMot[id]=listeMot[nbliste-1];
 			nbmot=nbliste-1;
 	}
-	else printf("looser ce n'est pas le bon mot \n");
-	
+	else printf("looser ce n'est pas le bon mot \n");	
 }
 
+void ajout_mot(char * mot)
+{
+	listeMot[nbliste] = malloc (strlen (mot) + 1);
+	strcpy(listeMot[nbliste],mot);
+	nbliste++;
+}

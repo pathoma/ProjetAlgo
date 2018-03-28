@@ -10,5 +10,5 @@ extern void lire_tableau_mots(void);
 extern char * recup_mot(int i);
 extern void supprime_mot(int i);
 extern int taille_mot(int i);
-extern  char * alea_mot(void);
+extern  int alea_mot(void);
 #endif

@@ -67,9 +67,9 @@ return strlen(tableauMot[i]);
 
 }
 
-extern  char * alea_mot(void){
+extern int alea_mot(void){
 	
 	srand(time(NULL));
 	int i=rand()%nbmot;
-	return tableauMot[i];
+	return i;
 }
