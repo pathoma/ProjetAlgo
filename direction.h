@@ -13,4 +13,3 @@ extern t_direction dir_convert_to_direc(int x);
 extern int dir_convert_to_int(t_direction);
 extern char * dir_affiche(t_direction direction);
 t_direction dir_aleatoire();
-

@@ -76,8 +76,8 @@ extern void dir_pas_suivant(int x, int y ,int nbpas,t_direction dir,int *px,int 
 			*py-=nbpas;
 		  break;
 		case NO:
-			py-=nbpas;
-			px-=nbpas;
+			*px-=nbpas;
+			*py-=nbpas;
 			break;
 		default:
 			fprintf(stderr, "direction inconnue\n");

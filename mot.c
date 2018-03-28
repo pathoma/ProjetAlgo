@@ -3,6 +3,7 @@
 #include <string.h> 
 #include "mot.h"
 #include "outil.h"
+#include<time.h>
 
 char *tableauMot[];
 int nbmot = 0;
@@ -64,4 +65,11 @@ extern void supprime_mot(int i){
 extern int taille_mot(int i){
 return strlen(tableauMot[i]);
 
+}
+
+extern  char * alea_mot(void){
+	
+	srand(time(NULL));
+	int i=rand()%nbmot;
+	return tableauMot[i];
 }
