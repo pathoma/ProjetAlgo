@@ -12,16 +12,16 @@ char mat[N][M];
 
 
 const char LIBRE ='0';
-mot_mat_t PlacerMot(mot_mat_t motmis);
+mot_mat_t PlacerMot(mot_mat_t motmis,mat_t ma_mat);
 
-int coord_valides(int x, int y){
+int coord_valides(int x, int y, mat_t ma_mat){
 
-	return (x>=0 && y>=0 && x<N && y<M);
+	return (x>=0 && y>=0 && x<ma_mat.nbc && y<ma_mat.nbl);
 
 }
 
 
-void init_matrice(void){
+/*void init_matrice(void){
 	int i;
 	int j;
 	for(i=0;i<N;i++){
@@ -29,20 +29,11 @@ void init_matrice(void){
 			mat[i][j]='0';
 		}
 	}
-/*
-	mat[0][0]='A';
-	mat[14][14]='X';
-	mat[3][5]='C';
-	mat[7][3]='V';	
-	mat[1][0]='M';
-	mat[2][0]='N';
-	mat[5][0]='P';
-	mat[1][14]='J';
-*/
+
 }
+*/
 
-
-void afficher_matrice(void){
+/*void afficher_matrice(void){
 	int i;
 	int j;
 	int numero=-1;
@@ -77,10 +68,10 @@ void afficher_matrice(void){
 		printf("\n");
 	}
 }
-
+*/
 //inserer mot à partir de (i1, j1) dans la direction direction
 //les verification sont faites avant
-t_direction inserer(char * mot,int i,int j,t_direction direction){
+t_direction inserer(char * mot,int i,int j,t_direction direction, mat_t ma_mat){
 	
 	int fin=0;
 	int fin2=0;
@@ -93,7 +84,7 @@ t_direction inserer(char * mot,int i,int j,t_direction direction){
 	//pour chaque lettre de mot
 	for(int l=0; l<T; l++){
 	// placer la lettre en i,j
-		mat[i][j]=mot[l];
+		ma_mat.val[i][j]=mot[l];
 	// se déplacer d'un pas dans la direction  direction
 		dir_pas_suivant(i, j , 1, direction, &i, &j);
 	}
@@ -102,139 +93,27 @@ t_direction inserer(char * mot,int i,int j,t_direction direction){
 }
 	
 
-mot_mat_t ajoutnonaleatoire(void){
+mot_mat_t ajoutnonaleatoire(mat_t ma_mat){
 	int i1=7,j1=6;
-	t_direction direc=inserer( "bonjour", i1,j1,E);
+	t_direction direc=inserer( "bonjour", i1,j1,E,ma_mat);
 	char * motaenvoyer="bonjour";
 	mot_mat_t mot =creer_mot_mat(i1,j1,motaenvoyer, direc);
-	PlacerMot(mot);
+	PlacerMot(mot,ma_mat);
 	return mot;
 }
-
-	 
-int insert_premier_mot(char * mot,int i1,int j1,int direction){
-	int fin=0;
-	int fin2=0;
-	int i,j;
-	int T=strlen(mot);
-while(fin2!=1){
-		
-		while(fin!=1){
-			
-			if(direction==1){
-				
-				if(i1-T>=0){
-					for(i=0;i<T;i++){
-						mat[i1-i][j1]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==2){
-				if(i1-T>=0 && j1+T<M){
-					for(i=0;i<T;i++){
-						mat[i1-i][j1+i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==3){
-				if(j1+T<M){
-					for(i=0;i<T;i++){
-						mat[i1][j1+i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==4){
-				if(i1+T<N && j1+T<M){
-					for(i=0;i<T;i++){
-						mat[i1+i][j1+i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==5){
-				if(i1+T<N){
-					for(i=0;i<T;i++){
-						mat[i1+i][j1]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==6){
-				if(i1+T<N && j1-T>=0){
-					for(i=0;i<T;i++){
-						mat[i1+i][j1-i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==7){
-				if(j1-T>=0){
-					for(i=0;i<T;i++){
-						mat[i1][j1-i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-			
-			if(direction==8){
-				if(i1-T>=0 && j1-T>=0){
-					for(i=0;i<=T;i++){
-						mat[i1-i][j1-i]=mot[i];
-					}
-					fin=1;
-					fin2=1;
-				} else fin=1;
-			}
-		}
-		fin=0;
-		direction=direction+1;
-		if(direction==9) direction=1;
-		printf("direction++\n");
-		}
-		return direction;
-}
-
-mot_mat_t premier_mot(char * mot){
-	
-	int i1,j1;
-	srand(time(NULL));
-	i1=rand()%N;
-	j1=rand()%M;
-	
-	int direction = rand()%8+1;
-	direction=insert_premier_mot(mot, i1, j1, direction);
-		fprintf(stderr,"testpre");
-	mot_mat_t mon_mot=creer_mot_mat(i1,j1,mot,dir_convert_to_direc(direction-1));
-	return mon_mot;
-}
-
-int parcours_libre(int coordX,int coordY,t_direction direction)
+int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,int version)
 { 
-	fprintf(stderr,"entrer dans parcours_libre avec les coordonnées : X= %i,Y=%i et la direction %s\n",coordX,coordY,dir_affiche(direction));
-	
+	//fprintf(stderr,"entrer dans parcours_libre avec les coordonnées : X= %i,Y=%i et la direction %s\n",coordX,coordY,dir_affiche(direction));
+	if(version==1)
+	{
 	dir_pas_suivant(coordX, coordY ,1 , direction, &coordX, &coordY);
+	}
 	int nbprochainelettre = 0;
 	char lettre='0';
-	while (lettre == '0' && coord_valides(coordX, coordY)== 1)
+	while (lettre == '0' && coord_valides(coordX, coordY,ma_mat)== 1)
 	{
 		//fprintf(stderr,"la valeur de la matrice est egale a  %c en X=%i et y=%i\n",mat[coordX][coordY],coordX,coordY);
-		if(mat[coordX][coordY]=='0') //case libre
+		if(ma_mat.val[coordX][coordY]=='0') //case libre
 		{
 				nbprochainelettre++;
 		}
@@ -245,11 +124,50 @@ int parcours_libre(int coordX,int coordY,t_direction direction)
 		//coordY += compteur2;	
 		dir_pas_suivant(coordX, coordY ,1 , direction, &coordX, &coordY);
 	}
-	fprintf(stderr," a la fin de parcours_libre il renvoie %i \n",nbprochainelettre);
+	//fprintf(stderr," a la fin de parcours_libre il renvoie %i \n",nbprochainelettre);
 	return nbprochainelettre;
 }
 
-mot_mat_t Placerlibre(void)
+	 
+mot_mat_t insert_premier_mot(char * mot,int i1,int j1,t_direction direction,mat_t ma_mat){
+	int bon =0;
+	int taille_mot=strlen(mot);
+	fprintf(stderr,"taille_mot =%i %s \n",taille_mot, mot);
+	while(bon==0)
+	{
+		if(taille_mot<=(parcours_libre(i1,j1,direction,ma_mat,0)))
+		{
+			bon=1;
+			
+			inserer(mot, i1,j1,direction,ma_mat);
+			mot_mat_t mon_mot=creer_mot_mat(i1,j1,mot,direction);
+			ajout_mot(mot);
+			return mon_mot;
+		}
+		else
+		{
+			direction=dir_suivant(direction);
+		}
+	
+	}
+}
+
+mot_mat_t premier_mot(char * mot, mat_t ma_mat){
+	
+	int i1,j1;
+	srand(time(NULL));
+	i1=rand()%N;
+	j1=rand()%M;
+	
+	t_direction direction = dir_aleatoire();
+	
+	mot_mat_t mon_mot=insert_premier_mot(mot, i1, j1, direction, ma_mat);
+		fprintf(stderr,"testpre");
+	return mon_mot;
+}
+
+
+mot_mat_t Placerlibre(mat_t ma_mat)
 {
 	t_direction dir;
 	int taille_max;
@@ -268,18 +186,18 @@ mot_mat_t Placerlibre(void)
 			//direction
 			for(int d=1;d<9;d++)
 			{
-				if(taille_max<parcours_libre(i,j,dir))
+				if(taille_max<parcours_libre(i,j,dir,ma_mat,0))
 				{
-					taille_max=parcours_libre(i,j,dir);
+					taille_max=parcours_libre(i,j,dir,ma_mat,0);
 					dir_final=dir;
 				}
 				dir=dir_suivant(dir);
 				d++;
 			}
-			fprintf(stderr,"on est en %s la taille max est : %i\n",dir_affiche(dir),taille_max );
-			fprintf(stderr,"on regarde la taille max \n");
+			//fprintf(stderr,"on est en %s la taille max est : %i\n",dir_affiche(dir),taille_max );
+			//fprintf(stderr,"on regarde la taille max \n");
 			
-			fprintf(stderr,"verification de l'endroit avec i=%i et j=%i avec la direction : %s\n",i,j,dir_affiche(dir_final));
+			//fprintf(stderr,"verification de l'endroit avec i=%i et j=%i avec la direction : %s\n",i,j,dir_affiche(dir_final));
 			while(taille_max>2)
 			{
 				for (int t=0;t<nbmot; t++)
@@ -287,10 +205,10 @@ mot_mat_t Placerlibre(void)
 					if(taille_mot(t)==taille_max)
 					{
 						char * mot=recup_mot(t); 
-						inserer(mot,i,j,dir_final);
+						inserer(mot,i,j,dir_final,ma_mat);
 						mot_mat_t mon_mot=creer_mot_mat(i,j,mot,dir_final);
 						fprintf(stderr,"le mot %s en coord: i=%i et j=%i ",recup_mot(i),i,j) ;
-						fprintf(stderr,"on insert le mot dans la matrice \n");
+						//fprintf(stderr,"on insert le mot dans la matrice \n");
 						supprime_mot(t);
 						ajout_mot(mot);
 						return mon_mot;	
@@ -306,7 +224,7 @@ mot_mat_t Placerlibre(void)
 	return mon_mot;
 }
 
-mot_mat_t PlacerMot(mot_mat_t motmis)
+mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 {
 	int taille_motmis=strlen(motmis.mot);
 	int tour =0;
@@ -332,35 +250,35 @@ mot_mat_t PlacerMot(mot_mat_t motmis)
 				{
 					if(motrecup[j] == motmis.mot[a])
 					{
-						fprintf(stderr, " motmis : %s ; motrecup:%s \n",motmis.mot,motrecup); 
-						fprintf(stderr, "lettre de motmis : %c : lettre du motrecup:%c \n",motmis.mot[a],motrecup[j]); 
+						//fprintf(stderr, " motmis : %s ; motrecup:%s \n",motmis.mot,motrecup); 
+						//fprintf(stderr, "lettre de motmis : %c : lettre du motrecup:%c \n",motmis.mot[a],motrecup[j]); 
 						compteur =0;
 						do{	
 							int coord2X;
 							int coord2Y;
 							dir_pas_suivant(motmis.colonne,motmis.ligne,a,motmis.dir,&coord2X,&coord2Y);
-							fprintf(stderr, "avant parcourslibre X : %i Y : %i \n",motmis.colonne,motmis.ligne);
-							fprintf(stderr, "\ncoord2X : %i coord2Y : %i , direction :%s \n",coord2X,coord2Y,dir_affiche(motmis.dir));
+							//fprintf(stderr, "avant parcourslibre X : %i Y : %i \n",motmis.colonne,motmis.ligne);
+							//fprintf(stderr, "\ncoord2X : %i coord2Y : %i , direction :%s \n",coord2X,coord2Y,dir_affiche(motmis.dir));
 							// si on a la place pour mettre le mot
 								//fprintf(stderr,"les coordonnées sont valides : \n");
-								fprintf(stderr, "la taille du mot = %i et la tailleavantlettre=%i \n",taille_mot(i),tailleavantlettre);
-								if(parcours_libre(coord2X,coord2Y,direction)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction))>=tailleavantlettre)
+								//fprintf(stderr, "la taille du mot = %i et la tailleavantlettre=%i \n",taille_mot(i),tailleavantlettre);
+								if(parcours_libre(coord2X,coord2Y,direction,ma_mat,1)>(taille_mot(i)-tailleavantlettre) && parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1)>tailleavantlettre)
 								{
-									fprintf(stderr,"lettre: %c \n", motmis.mot[tailleavantlettre+1] );
-									fprintf(stderr," avantlettre: %i X:%i, Y:%i,direction:%s \n",tailleavantlettre,motmis.colonne,motmis.ligne,dir_affiche(direction));
+									//fprintf(stderr,"lettre: %c \n", motmis.mot[tailleavantlettre+1] );
+									//fprintf(stderr," avantlettre: %i X:%i, Y:%i,direction:%s  \n",tailleavantlettre,motmis.colonne,motmis.ligne,dir_affiche(direction));
 								
 									//si les coordonnées (coord2X,coord2Y) sont valides
-									if(coord_valides(coord2X,coord2Y))
+									if(coord_valides(coord2X,coord2Y,ma_mat))
 									{
 									// on va dans la direction inverse de direction
 									// nombre de pas = tailleavantlettre
 									int x, y;
 									dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
 									
-										fprintf(stderr, " on place le mot en X:%i, Y%i, direction:%s \n",x,y,dir_affiche(direction));
+										fprintf(stderr, " on place le mot %s en X:%i, Y%i, direction:%s  car la place etait de %i avant et %i apres)\n",recup_mot(i),x,y,dir_affiche(direction),parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1),parcours_libre(coord2X,coord2Y,direction,ma_mat,1));
 								
 										// on insere mot_recup à partir de (x,y) dans la direction direction
-										inserer(motrecup, x,y,direction);
+										inserer(motrecup, x,y,direction,ma_mat);
 										supprime_mot(i);
 										compteur = 8;
 										printf("\n");
@@ -369,16 +287,16 @@ mot_mat_t PlacerMot(mot_mat_t motmis)
 										return mon_mot;	
 									}
 									else{ 
-									fprintf(stderr,"on ne peut pas le mettre dans des coordonnées valides direction %s:\n",dir_affiche(direction) );
+									//fprintf(stderr,"on ne peut pas le mettre dans des coordonnées valides direction %s:\n",dir_affiche(direction) );
 								direction=dir_suivant(direction);
 								compteur++;
 								}
 							}
 							else { 
 								/* on n'a pas réussi à poser le mot dans la direction 'direction', on essaye avec la suivante */
-								fprintf(stderr, "pas la place pour %s dans la direction %s !\n", motrecup, dir_affiche(direction));
+								//fprintf(stderr, "pas la place pour %s dans la direction %s !\n", motrecup, dir_affiche(direction));
 								direction=dir_suivant(direction);
-								compteur++;
+								compteur++;	
 					
 							}  
 						}while(compteur<8);
@@ -395,22 +313,43 @@ mot_mat_t PlacerMot(mot_mat_t motmis)
 	return mon_mot;	
 }
 
+void remplir_final(mat_t ma_mat){
+for (int i=0; i<ma_mat.nbl;i++)
+	{
+		for (int j=0; j<ma_mat.nbc;j++)
+		{
+			if(ma_mat.val[i][j]=='0')
+			{
+				char C = rand() % ('Z' - 'A' + 1) + 'A';
+				ma_mat.val[i][j] ="_";
+			}
+		}
+	}
+}
+
 int main(){
-	init_matrice();	 
+	mat_t ma_mat= creer_matrice(15 ,15);
+	init_matrice(ma_mat);	 
+	fprintf(stderr,"matrice de %i x %i ", ma_mat.nbc,ma_mat.nbl);
 	lire_fichier();
-	mot_mat_t monmot=premier_mot(recup_mot(alea_mot()));
-	for(int i = 0; i<20; i++)
+	int valeur=alea_mot();
+	mot_mat_t monmot=premier_mot(recup_mot(valeur),ma_mat);
+	supprime_mot(valeur);
+		for(int i = 0; i<50; i++)
 	{
 		if(monmot.ligne!=-1)
 		{
-			monmot=PlacerMot(monmot);
+			monmot=PlacerMot(monmot,ma_mat);
 		}
 		else
 		{
-			monmot=Placerlibre();
+			monmot=Placerlibre(ma_mat);
 		}
 	}
-	afficher_matrice();
+	affiche_matrice(ma_mat);
+	remplir_final(ma_mat);
+	printf("\n");	
+	affiche_matrice(ma_mat);
 	afficher_liste();
  	
 }

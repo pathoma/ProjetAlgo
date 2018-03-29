@@ -1,9 +1,7 @@
 
 #include"premier_saisie.h"
-
 #define N 15
 #define M 15
-char mat[N][M];
 
 char* listeMot[50];
 int nbliste=0; 
@@ -35,7 +33,7 @@ char* inversion(char*mot){
 // insertion du mot "mot" à partir de (i1,j1) dans la direction "direction"	
 
 
-char* mot_trouver(int i1,int j1,int i2,int j2){
+char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 	
 	int i;
 	int taille;
@@ -46,7 +44,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 		
 		taille=(j2-j1)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1][j1+i];
+			trouver[i]=mat.val[i1][j1+i];
 		}
 		
 		return trouver;
@@ -57,7 +55,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 		
 		taille=(j1-j2)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1][j1-i];
+			trouver[i]=mat.val[i1][j1-i];
 		}
 		
 		return trouver;
@@ -66,7 +64,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(j1==j2&&i1<i2){		//S
 		taille=(i2-i1)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1+i][j1];
+			trouver[i]=mat.val[i1+i][j1];
 		}
 		
 		return trouver;
@@ -75,7 +73,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(j1==j2&&i2<i1){		//N
 		taille=(i1-i2)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1-i][j1];
+			trouver[i]=mat.val[i1-i][j1];
 		}
 		
 		return trouver;
@@ -84,7 +82,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(i2>i1&&j2>j1){		//SE
 		taille=(i2-i1)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1+i][j1+i];
+			trouver[i]=mat.val[i1+i][j1+i];
 		}
 		
 		return trouver;
@@ -93,7 +91,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(i1>i2&&j1>j2){		//NO
 		taille=(i1-i2)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1-i][j1-i];
+			trouver[i]=mat.val[i1-i][j1-i];
 		}
 		
 		return trouver;
@@ -102,7 +100,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(i2>i1&&j1>j2){		//SO
 		taille=(i2-i1)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1+i][j1-i];
+			trouver[i]=mat.val[i1+i][j1-i];
 		}
 		
 		return trouver;
@@ -111,7 +109,7 @@ char* mot_trouver(int i1,int j1,int i2,int j2){
 	else if(i1>i2&&j2>j1){		//NE
 		taille=(i1-i2)+1;
 		for(i=0;i<taille;i++){
-			trouver[i]=mat[i1-i][j1+i];
+			trouver[i]=mat.val[i1-i][j1+i];
 		}
 		
 		return trouver;
@@ -166,7 +164,7 @@ void afficher_liste(){
 	printf("\n");
 }
 	
-int saisie(){
+int saisie(mat_t mat){
 
 	int deb1,deb2,fin1,fin2;
 	int id;
@@ -190,7 +188,7 @@ int saisie(){
 	}while(fin1>=N||fin2>=M||fin1<0||fin2<0);
 
 
-	trouver=mot_trouver(deb1,deb2,fin1,fin2);
+	trouver=mot_trouver(deb1,deb2,fin1,fin2,mat);
 
 	printf("\n");
 	

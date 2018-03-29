@@ -19,14 +19,38 @@ extern mat_t creer_matrice(int ligne,int colonne)
 
 extern void affiche_matrice(mat_t ma_mat)
 {
-	
-	for (int i=0; i<ma_mat.nbl;i++)
-	{
-		for (int j=0; j<ma_mat.nbc;j++)
-		{
-			printf(" %c |",ma_mat.val[i][j]);
-		}
+	printf("\n");
+	int i;
+	int j;
+	int numero=-1;
+	int numero2=0;
+	int condi=1 ;
+	int premier=0;
 
+	
+	for(i=-1;i<ma_mat.nbc;i++){
+		for(j=0;j<ma_mat.nbl+1;j++){
+			
+			if(condi==0){
+				printf("%2i",numero2);
+				numero2++;
+				condi=2;
+			}
+			if(condi==1){
+				printf("%2i ",numero);
+				numero++;
+
+			} else {
+				if(premier==1){
+					printf(" ");
+					premier=2;
+				}
+				if(j<ma_mat.nbl)printf("%2c ",ma_mat.val[i][j]);
+
+			}
+		}
+		condi=0;
+		premier=1;
 		printf("\n");
 	}
 }
@@ -34,9 +58,9 @@ extern void affiche_matrice(mat_t ma_mat)
 extern void init_matrice(mat_t ma_mat){
 	int i;
 	int j;
-	for(i=0;i<ma_mat.nbl;i++){
-		for(j=0;j<ma_mat.nbc;j++){
-			ma_mat.val[i][j]='0';
+	for(i=0;i<ma_mat.nbc;i++){
+		for(j=0;j<ma_mat.nbl;j++){
+		 	ma_mat.val[i][j]='0';
 		}
 	}
 }
