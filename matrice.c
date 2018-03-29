@@ -58,9 +58,12 @@ extern void affiche_matrice(mat_t ma_mat)
 extern void init_matrice(mat_t ma_mat){
 	int i;
 	int j;
+	fprintf(stderr,"les valeurs sont %i , %i \n", ma_mat.nbc,ma_mat.nbl);
 	for(i=0;i<ma_mat.nbc;i++){
 		for(j=0;j<ma_mat.nbl;j++){
+			fprintf(stderr,"insertion dans %i %i \n", i,j);
 		 	ma_mat.val[i][j]='0';
+
 		}
 	}
 }
