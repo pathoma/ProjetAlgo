@@ -30,10 +30,10 @@ int niv,X,Y;
 			break;
 	}	
 	mat_t ma_mat= creer_matrice(X,Y);
-	fprintf(stderr,"matrice de %i x %i ", ma_mat.nbc,ma_mat.nbl);
-	fprintf(stderr,"la matrice ce creer \n");
+	//fprintf(stderr,"matrice de %i x %i ", ma_mat.nbc,ma_mat.nbl);
+	//fprintf(stderr,"la matrice ce creer \n");
 	init_matrice(ma_mat);	
-	fprintf(stderr,"la matrice s'initialise \n"); 
+	//fprintf(stderr,"la matrice s'initialise \n"); 
 	
 	lire_fichier();
 	int valeur=alea_mot();

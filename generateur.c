@@ -171,7 +171,7 @@ int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,in
 mot_mat_t insert_premier_mot(char * mot,int i1,int j1,t_direction direction,mat_t ma_mat){
 	int bon =0;
 	int taille_mot=strlen(mot);
-	fprintf(stderr,"taille_mot =%i %s \n",taille_mot, mot);
+	//fprintf(stderr,"taille_mot =%i %s \n",taille_mot, mot);
 	while(bon==0)
 	{
 		if(taille_mot<=(parcours_libre(i1,j1,direction,ma_mat,0)))
@@ -212,7 +212,7 @@ mot_mat_t premier_mot(char * mot, mat_t ma_mat){
 	t_direction direction = dir_aleatoire();
 	
 	mot_mat_t mon_mot=insert_premier_mot(mot, i1, j1, direction, ma_mat);
-		fprintf(stderr,"testpre");
+		//fprintf(stderr,"testpre");
 	return mon_mot;
 }
 
@@ -263,7 +263,7 @@ mot_mat_t Placerlibre(mat_t ma_mat)
 						char * mot=recup_mot(t); 
 						inserer(mot,i,j,dir_final,ma_mat);
 						mot_mat_t mon_mot=creer_mot_mat(i,j,mot,dir_final);
-						fprintf(stderr,"le mot %s en coord: i=%i et j=%i ",recup_mot(i),i,j) ;
+						//fprintf(stderr,"le mot %s en coord: i=%i et j=%i ",recup_mot(i),i,j) ;
 						//fprintf(stderr,"on insert le mot dans la matrice \n");
 						supprime_mot(t);
 						ajout_mot(mot);
@@ -304,7 +304,7 @@ mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 		{
 			char * motrecup=recup_mot(i);
 			tailleavantlettre=0;
-			printf("\n %s ", motrecup);
+			//printf("\n %s ", motrecup);
 
 			//pour toutes les lettres du mot de la liste
 			for (int j=0;j<taille_mot(i); j++)
@@ -339,7 +339,7 @@ mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 									int x, y;
 									dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
 									
-								fprintf(stderr, " on place le mot %s en X:%i, Y%i, direction:%s  car la place etait de %i avant et %i apres)\n",recup_mot(i),x,y,dir_affiche(direction),parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1),parcours_libre(coord2X,coord2Y,direction,ma_mat,1));
+								//fprintf(stderr, " on place le mot %s en X:%i, Y%i, direction:%s  car la place etait de %i avant et %i apres)\n",recup_mot(i),x,y,dir_affiche(direction),parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1),parcours_libre(coord2X,coord2Y,direction,ma_mat,1));
 								
 										// on insere mot_recup à partir de (x,y) dans la direction direction
 										inserer(motrecup, x,y,direction,ma_mat);
