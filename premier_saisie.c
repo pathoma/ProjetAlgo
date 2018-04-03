@@ -198,6 +198,7 @@ int saisie(mat_t mat){
 			printf("bien joué, vous avez trouvé un mot");
 			listeMot[id]=listeMot[nbliste-1];
 			nbmot=nbliste-1;
+			nbliste=nbliste-1;
 	}
 	else printf("looser ce n'est pas le bon mot \n");	
 }
@@ -208,3 +209,39 @@ void ajout_mot(char * mot)
 	strcpy(listeMot[nbliste],mot);
 	nbliste++;
 }
+
+void remplissage(mat_t mat){
+	int i,j;
+	int frec;
+	int lettre;  
+	char alphabet1[] = "EAISNRTOLU";   	 //10 première lettre les plus utilisées
+	char alphabet2[] = "DCMPGBVHF";	   	 //tout le reste
+	char alphabet3[] = "QYXJKWZ";	   	 //lettre d'une fréquence inférieur à 1%
+	srand(time(NULL));
+   
+	for(i=0;i<N;i++){
+	   	for(j=0;j<M;j++){
+	   	   	if(mat.val[i][j]=='0'){
+				frec=rand()%3;
+				if(frec!=0){
+					lettre =rand()% 9;
+					printf("%i ",lettre);
+					mat.val[i][j]= alphabet1[lettre];
+				} else {
+					frec=rand()%3;
+					if(frec!=0){
+						lettre =rand()% 8;
+						printf("%i ",lettre);
+						mat.val[i][j]= alphabet2[lettre];
+					} else {	
+						lettre =rand()% 6;
+						printf("%i ",lettre);
+						mat.val[i][j]= alphabet3[lettre];
+					}
+				}		
+			}
+	   	}
+	}
+}
+
+
