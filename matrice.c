@@ -3,20 +3,41 @@
 #include <string.h>
 #include "matrice.h"
 
+/**
+ * ... Documentation ...
+ * \file matrice.c
+ * \brief matrice.c comporte toute les fonction utiles a la gestion de la matrice
+ * \author THOMAS Paul 
+ * \version 1.0
+ * \date 3 avril 2018
+*/
+
+/**
+ * \fn mat_t creer_matrice(int ligne,int colonne)
+ * \brief fonction qui creer et renvoie une matrice de taille ligne colonne
+ * \param ligne est le nombre de ligne que l'on veux dans la matrice
+ * \param colonne est le nombre de colonne que l'on veux dans la matrice
+ * \return une variable de type mat_t : une matrice
+*/
 extern mat_t creer_matrice(int ligne,int colonne)
 {
 	mat_t ma_mat;
 	ma_mat.nbl=ligne;
 	ma_mat.nbc=colonne;
-	ma_mat.val= (char **) malloc(ma_mat.nbl *sizeof(char *));
-	for (int i=0; i<ma_mat.nbl;i++)
+	ma_mat.val= (char **) malloc(ma_mat.nbc *sizeof(char *));
+	for (int i=0; i<ma_mat.nbc;i++)
 	{
-		ma_mat.val[i]=(char*) malloc(ma_mat.nbc *sizeof(char));
+		ma_mat.val[i]=(char*) malloc(ma_mat.nbl *sizeof(char));
 	}
 
 	return ma_mat;
 }
 
+/**
+ * \fn mat_t affiche_matrice(mat_t ma_mat)
+ * \brief fonction qui affihce la matrice
+ * \param ma_mat est la matrice que l'on veut afficher
+*/
 extern void affiche_matrice(mat_t ma_mat)
 {
 	printf("\n");
@@ -55,6 +76,11 @@ extern void affiche_matrice(mat_t ma_mat)
 	}
 }
 
+/**
+ * \fn void init_matrice(mat_t ma_mat)
+ * \brief fonction qui met dans toutes les case de la matrice en parametre '0'
+ * \param ma_mat est la matrice que l'on veut initialiser
+*/
 extern void init_matrice(mat_t ma_mat){
 	int i;
 	int j;
@@ -68,6 +94,11 @@ extern void init_matrice(mat_t ma_mat){
 	}
 }
 
+/**
+ * \fn void supprim_mat(mat_t ma_mat)
+ * \brief fonction qui supprime la matrice
+ * \param ma_mat est la matrice que l'on veut supprimer
+*/
 extern void supprim_mat(mat_t ma_mat)
 {
 	for (int i=0; i<ma_mat.nbl;i++)

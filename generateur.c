@@ -3,7 +3,7 @@
 /**
  * ... Documentation ...
  * \file generateur.c
- * \brief generateur.c est un programme qui a pour but de générer le mot mélés sur lesquels jouer 
+ * \brief generateur.c est un liste de fonction qui sont utilisé pour générer le mot mélés sur lesquels jouer 
  * \author THOMAS Paul  BENJAMIN Matthey
  * \version 1.0
  * \date 3 avril 2018
@@ -382,9 +382,9 @@ mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
  * \param ma_mat represente une matrice 
 */
 void remplir_final(mat_t ma_mat){
-for (int i=0; i<ma_mat.nbl;i++)
+for (int i=0; i<ma_mat.nbc;i++)
 	{
-		for (int j=0; j<ma_mat.nbc;j++)
+		for (int j=0; j<ma_mat.nbl;j++)
 		{
 			if(ma_mat.val[i][j]=='0')
 			{
