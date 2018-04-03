@@ -8,12 +8,28 @@
 
 #define N 15
 #define M 15
-char mat[N][M];
+
+/**
+ * ... Documentation ...
+ * \file generateur.c
+ * \brief generateur.c est un programme qui a pour but de générer le mot mélés sur lesquels jouer 
+ * \author THOMAS Paul  BENJAMIN Matthey
+ * \version 1.0
+ * \date 3 avril 2018
+*/
 
 
 const char LIBRE ='0';
 mot_mat_t PlacerMot(mot_mat_t motmis,mat_t ma_mat);
 
+/**
+ * \fn int coord_valides(int x, int y, mat_t ma_mat)
+ * \brief fonction qui vérifie que les coordonnées données sont possible dans la matrice donnée
+ * \param x la Coordonné X qui équivaut a la colonne ciblé
+ * \param y la Coordonné Y qui équivaut a la ligne ciblé
+ * \param ma_mat represente une matrice
+ * \return vrai si les coordonnées sont valides faux sinon 
+*/
 int coord_valides(int x, int y, mat_t ma_mat){
 
 	return (x>=0 && y>=0 && x<ma_mat.nbc && y<ma_mat.nbl);
@@ -69,8 +85,19 @@ int coord_valides(int x, int y, mat_t ma_mat){
 	}
 }
 */
-//inserer mot à partir de (i1, j1) dans la direction direction
-//les verification sont faites avant
+
+/**
+ *\fn t_direction inserer(char * mot,int i,int j,t_direction direction, mat_t ma_mat)
+ * \brief insere dans la matrice donnéaux coordonnées avec la direction le mot 
+ * \param mot est un mot que l'on veut inserer
+ * \param i la Coordonné I qui équivaut a la colonne ciblé
+ * \param j la Coordonné J qui équivaut a la ligne ciblé
+ * \param direction est une direction 
+ * \param ma_mat represente une matrice
+ * \return la direction du mot qu'on a inserer
+*/
+
+
 t_direction inserer(char * mot,int i,int j,t_direction direction, mat_t ma_mat){
 	
 	int fin=0;
@@ -92,6 +119,12 @@ t_direction inserer(char * mot,int i,int j,t_direction direction, mat_t ma_mat){
 	return direction;
 }
 	
+/**
+ * \fn mot_mat_t ajoutnonaleatoire(mat_t ma_mat)
+ * \brief fonction qui insere bonjour en 7,6 direction est
+ * \param ma_mat represente une matrice 
+ * \return une variable de type mot_mat_t 
+*/
 
 mot_mat_t ajoutnonaleatoire(mat_t ma_mat){
 	int i1=7,j1=6;
@@ -101,6 +134,16 @@ mot_mat_t ajoutnonaleatoire(mat_t ma_mat){
 	PlacerMot(mot,ma_mat);
 	return mot;
 }
+
+/**
+ * \fn int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,int version)
+ * \brief fonction qui regarde la taille dans une direction donnée sans lettre
+ * \param coordX represente la colonne ou l'on va commencer la recherche
+ * \param coordX represente la ligne ou l'on va commencer la recherche  
+ * \param direction represente la direction ou l'on va rechercher. définie dans direction.h
+ * \param ma_mat represente une matrice qui a été définie dans matrice.h 
+ * \return un int qui correspont a la taille disponible
+*/
 int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,int version)
 { 
 	//fprintf(stderr,"entrer dans parcours_libre avec les coordonnées : X= %i,Y=%i et la direction %s\n",coordX,coordY,dir_affiche(direction));
@@ -118,7 +161,7 @@ int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,in
 				nbprochainelettre++;
 		}
 		else{
-			lettre=mat[coordX][coordY];
+			lettre='1';
 		}
 		//coordX += compteur1;
 		//coordY += compteur2;	
@@ -128,7 +171,16 @@ int parcours_libre(int coordX,int coordY,t_direction direction,  mat_t ma_mat,in
 	return nbprochainelettre;
 }
 
-	 
+/**
+ * \fn mot_mat_t insert_premier_mot(char * mot,int i1,int j1,t_direction direction,mat_t ma_mat)
+ * \brief insere un mot sans verification 
+ * \param mot est me mot
+ * \param i1 represente la la colonne ou l'on va commencer la recherche  
+ * \param j1 represente la la ligne ou l'on va commencer la recherche  
+ * \param direction represente la direction ou l'on va inserer
+ * \param ma_mat represente une matrice
+ * \return une variable de type mot_mat_t
+*/
 mot_mat_t insert_premier_mot(char * mot,int i1,int j1,t_direction direction,mat_t ma_mat){
 	int bon =0;
 	int taille_mot=strlen(mot);
@@ -152,6 +204,17 @@ mot_mat_t insert_premier_mot(char * mot,int i1,int j1,t_direction direction,mat_
 	}
 }
 
+/**
+ * \fn mot_mat_t premier_mot(char * mot, mat_t ma_mat)
+ * \brief insere un mot avec des coordonnées et une direction alatoire
+ * \param mot est me mot
+ * \param i1 represente la la colonne ou l'on va commencer l'insertion  
+ * \param j1 represente la la ligne ou l'on va commencer l'insertion  
+ * \param direction represente la direction ou l'on va inserer
+ * \param ma_mat represente une matrice 
+ * \return une variable de type mot_mat_t
+*/
+
 mot_mat_t premier_mot(char * mot, mat_t ma_mat){
 	
 	int i1,j1;
@@ -166,6 +229,12 @@ mot_mat_t premier_mot(char * mot, mat_t ma_mat){
 	return mon_mot;
 }
 
+/**
+ * \fn mot_mat_t Placerlibre(mat_t ma_mat)
+ * \brief insere un mot,de la liste des mots,le plus grand possible à l'endroit le plus grand possible
+ * \param ma_mat represente une matrice 
+ * \return une variable de type mot_mat_t
+*/
 
 mot_mat_t Placerlibre(mat_t ma_mat)
 {
@@ -193,7 +262,7 @@ mot_mat_t Placerlibre(mat_t ma_mat)
 				}
 				dir=dir_suivant(dir);
 				d++;
-			}
+		}
 			//fprintf(stderr,"on est en %s la taille max est : %i\n",dir_affiche(dir),taille_max );
 			//fprintf(stderr,"on regarde la taille max \n");
 			
@@ -223,6 +292,14 @@ mot_mat_t Placerlibre(mat_t ma_mat)
 	mot_mat_t mon_mot=creer_mot_mat(-1,-1,"0",N);
 	return mon_mot;
 }
+
+/**
+ * \fn mot_mat_t Placerlibre(mat_t ma_mat)
+ * \brief essaye d'inserer un mot ayant un lettre commune avec le mot déjà mis si il y a assez de place 
+  * \param motmis represente un mot dans une matrice 
+ * \param ma_mat represente une matrice 
+ * \return une variable de type mot_mat_t
+*/
 
 mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 {
@@ -275,7 +352,7 @@ mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 									int x, y;
 									dir_pas_suivant(coord2X, coord2Y, tailleavantlettre, dir_inverse(direction), &x, &y);
 									
-										fprintf(stderr, " on place le mot %s en X:%i, Y%i, direction:%s  car la place etait de %i avant et %i apres)\n",recup_mot(i),x,y,dir_affiche(direction),parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1),parcours_libre(coord2X,coord2Y,direction,ma_mat,1));
+								fprintf(stderr, " on place le mot %s en X:%i, Y%i, direction:%s  car la place etait de %i avant et %i apres)\n",recup_mot(i),x,y,dir_affiche(direction),parcours_libre(coord2X,coord2Y,dir_inverse(direction),ma_mat,1),parcours_libre(coord2X,coord2Y,direction,ma_mat,1));
 								
 										// on insere mot_recup à partir de (x,y) dans la direction direction
 										inserer(motrecup, x,y,direction,ma_mat);
@@ -312,7 +389,11 @@ mot_mat_t PlacerMot(mot_mat_t motmis, mat_t ma_mat)
 	mot_mat_t mon_mot=creer_mot_mat(-1,-1,"0",N);
 	return mon_mot;	
 }
-
+/**
+ * \fn void remplir_final(mat_t ma_mat)
+ * \brief insere dans tout les endroits où il n'y a pas de lettre une lettre aléatoire
+ * \param ma_mat represente une matrice 
+*/
 void remplir_final(mat_t ma_mat){
 for (int i=0; i<ma_mat.nbl;i++)
 	{
