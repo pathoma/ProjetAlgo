@@ -1,13 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<time.h>
-#include"premier_saisie.h"
-#include"mot_mat.h"
-#include"mot.h"
-
-#define N 15
-#define M 15
+#include"generateur.h"
 
 /**
  * ... Documentation ...
@@ -17,10 +8,6 @@
  * \version 1.0
  * \date 3 avril 2018
 */
-
-
-const char LIBRE ='0';
-mot_mat_t PlacerMot(mot_mat_t motmis,mat_t ma_mat);
 
 /**
  * \fn int coord_valides(int x, int y, mat_t ma_mat)
@@ -219,8 +206,8 @@ mot_mat_t premier_mot(char * mot, mat_t ma_mat){
 	
 	int i1,j1;
 	srand(time(NULL));
-	i1=rand()%N;
-	j1=rand()%M;
+	i1=rand()%ma_mat.nbc;
+	j1=rand()%ma_mat.nbl;
 	
 	t_direction direction = dir_aleatoire();
 	
@@ -407,57 +394,5 @@ for (int i=0; i<ma_mat.nbl;i++)
 		}
 	}
 }
-
-int main(){
-	int niv,X,Y;
-	do{
-	printf("\nquelle niveau voulez vous pour votre jeu : 1 pour facile 2 pour normal et 3 pour difficile\n");
-	scanf("%i", &niv);
-	}
-	while(niv<0 && niv>3);
 	
-	switch (niv)
-	{
-		case 1:
-			X=10;
-			Y=10;
-			break;
-		case 2:
-			X=15;
-			Y=15;
-			break;
-		case 3:
-			X=20;
-			Y=20;
-		default:
-			break;
-	}	
-	mat_t ma_mat= creer_matrice(X,Y);
-	fprintf(stderr,"matrice de %i x %i ", ma_mat.nbc,ma_mat.nbl);
-	fprintf(stderr,"la matrice ce creer \n");
-	init_matrice(ma_mat);	
-	fprintf(stderr,"la matrice s'initialise \n"); 
-	
-	lire_fichier();
-	int valeur=alea_mot();
-	mot_mat_t monmot=premier_mot(recup_mot(valeur),ma_mat);
-	supprime_mot(valeur);
-		for(int i = 0; i<ma_mat.nbc*2; i++)
-	{
-		if(monmot.ligne!=-1)
-		{
-			monmot=PlacerMot(monmot,ma_mat);
-		}
-		else
-		{
-			monmot=Placerlibre(ma_mat);
-		}
-	}
-	affiche_matrice(ma_mat);
-	remplir_final(ma_mat);
-	printf("\n");	
-	affiche_matrice(ma_mat);
-	afficher_liste();
- 	
-}
 
