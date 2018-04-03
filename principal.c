@@ -51,7 +51,13 @@ int niv,X,Y;
 	affiche_matrice(ma_mat);
 	remplir_final(ma_mat);
 	printf("\n");	
+
+	afficher_liste();	
 	affiche_matrice(ma_mat);
-	afficher_liste();
+
+	saisie(ma_mat);
+	
+ 	afficher_liste();	
+	affiche_matrice(ma_mat);
  	
 }
