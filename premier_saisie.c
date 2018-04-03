@@ -151,7 +151,7 @@ void remplire_liste(){
 	}
 }
 
-void afficher_liste(){
+int afficher_liste(){
 	int i=0;
 	printf("\n");
 	printf("\n");
@@ -162,6 +162,7 @@ void afficher_liste(){
 	}
 	printf("\n");
 	printf("\n");
+	return nbliste;
 }
 	
 int saisie(mat_t mat){
@@ -244,4 +245,7 @@ void remplissage(mat_t mat){
 	}
 }
 
+int transfert(){
+	return nbliste;
+}
 

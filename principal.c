@@ -4,6 +4,8 @@
 #include"generateur.h"
 
 int main(){
+
+int nbliste=1;
 int niv,X,Y;
 	do{
 	printf("\nquelle niveau voulez vous pour votre jeu : 1 pour facile 2 pour normal et 3 pour difficile\n");
@@ -55,9 +57,13 @@ int niv,X,Y;
 	afficher_liste();	
 	affiche_matrice(ma_mat);
 
-	saisie(ma_mat);
+	while(nbliste>0){
+		saisie(ma_mat);
+ 		nbliste=afficher_liste();
+		printf("\n %i \n",nbliste);	
+		affiche_matrice(ma_mat);
+	}
 	
- 	afficher_liste();	
-	affiche_matrice(ma_mat);
+	printf("\n BRAVO VOUS AVEZ FINI LE JEU !!!");
  	
 }
