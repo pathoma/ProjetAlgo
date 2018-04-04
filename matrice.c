@@ -19,6 +19,7 @@
  * \param colonne est le nombre de colonne que l'on veux dans la matrice
  * \return une variable de type mat_t : une matrice
 */
+
 extern mat_t creer_matrice(int ligne,int colonne)
 {
 	mat_t ma_mat;
@@ -66,8 +67,18 @@ extern void affiche_matrice(mat_t ma_mat)
 					printf(" ");
 					premier=2;
 				}
-				if(j<ma_mat.nbl)printf("%2c ",ma_mat.val[i][j]);
-
+				if(j<ma_mat.nbl){
+					if(j<ma_mat.nbc){
+					
+					printf("|");
+					if(i==ma_mat.nbl-1) printf("͟");
+					printf("͞");
+					printf("%c ",ma_mat.val[i][j]);
+					printf("͞");
+					if(j==ma_mat.nbc-1) printf("|");
+					if(i==ma_mat.nbl-1&&j<ma_mat.nbc-1) printf("͟");
+					}
+				}
 			}
 		}
 		condi=0;

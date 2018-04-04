@@ -119,9 +119,8 @@ extern t_direction dir_convert_to_direc(int x){
 	return direc;
 }
 extern int dir_convert_to_int(t_direction x){
-	int direc;
 	
-	if(x<0 || x >8) return -1;
+	if( x >8) return -1;
 	return (int) x;
 	
 	/*switch (x)

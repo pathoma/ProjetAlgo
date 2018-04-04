@@ -1,10 +1,24 @@
-
 #include"premier_saisie.h"
-#define N 15
-#define M 15
+
+
+/**
+ * ... Documentation ...
+ * \file premier_saisie.c
+ * \brief premier_saisie.c comporte toutes les fonctions utiles a la saisie par le joueur
+ * \author MATHEY Benjamin 
+ * \version 1.0
+ * \date 3 avril 2018
+*/
 
 char* listeMot[50];
 int nbliste=0; 
+
+
+/**
+ * \fn char* inversion(char*mot)
+ * \brief fonction qui reçoit un mot, l'inverse et le retourne
+ * \return une variable de type chaine de caractère
+*/
 
 // Fonction qui prend le mot l'inverse et retourne son inverse
 char* inversion(char*mot){
@@ -30,9 +44,15 @@ char* inversion(char*mot){
 	return inverse;
 }
 
+/**
+ * \fn char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat)
+ * \brief fonction qui reçoit une coordonné de début et une de fin d'un mot a lire
+ * \param i1 et j1 corresponde respectivement à la ligne puis la colonne du début du mot à lire 
+ * \param i2 et j2 corresponde respectivement à la ligne puis la colonne de la fin du mot à lire
+ * \return une variable de type chaine de caractère
+*/
+
 // insertion du mot "mot" à partir de (i1,j1) dans la direction "direction"	
-
-
 char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 	
 	int i;
@@ -47,7 +67,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1][j1+i];
 		}
 		
-		return trouver;
 	}
 	
 	
@@ -58,7 +77,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1][j1-i];
 		}
 		
-		return trouver;
 	}
 	
 	else if(j1==j2&&i1<i2){		//S
@@ -67,7 +85,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1+i][j1];
 		}
 		
-		return trouver;
 	}
 	
 	else if(j1==j2&&i2<i1){		//N
@@ -76,7 +93,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1-i][j1];
 		}
 		
-		return trouver;
 	}
 
 	else if(i2>i1&&j2>j1){		//SE
@@ -85,7 +101,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1+i][j1+i];
 		}
 		
-		return trouver;
 	}
 
 	else if(i1>i2&&j1>j2){		//NO
@@ -94,7 +109,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1-i][j1-i];
 		}
 		
-		return trouver;
 	}
 	
 	else if(i2>i1&&j1>j2){		//SO
@@ -103,7 +117,6 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1+i][j1-i];
 		}
 		
-		return trouver;
 	}
 
 	else if(i1>i2&&j2>j1){		//NE
@@ -112,10 +125,19 @@ char* mot_trouver(int i1,int j1,int i2,int j2, mat_t mat){
 			trouver[i]=mat.val[i1-i][j1+i];
 		}
 		
-		return trouver;
 	}
+	return trouver;
 	
 }
+
+/**
+ * \fn int verification(char*mot,char*trouver)
+ * \brief fonction qui reçoit deux mots les compares et renvoit vrai(1) si ils sont identiques et faux(0) sinon
+ * \param mot correspond au mot de la liste que le joueur pense avoir trouvé
+ * \param trouver correspond au mot que le joueur à saisie via les coordonnés
+ * \return vrai ou faux (1 ou 0)
+*/
+
 int verification(char*mot,char*trouver){
 
 	int taille=strlen(mot);
@@ -144,12 +166,12 @@ int verification(char*mot,char*trouver){
 	return 1;
 }
 	
-void remplire_liste(){
-	int i;
-	for(i=0;i<nbliste;i++){
-		listeMot[i]=tableauMot[i];
-	}
-}
+/**
+ * \fn int afficher_liste()
+ * \brief fonction qui affiche la liste de mot qu'il reste à trouvé en renvoyant le nombre le mot restant
+ * \return une variable de type entier
+*/
+
 
 int afficher_liste(){
 	int i=0;
@@ -164,8 +186,13 @@ int afficher_liste(){
 	printf("\n");
 	return nbliste;
 }
-	
-int saisie(mat_t mat){
+
+/**
+ * \fn void saisie(mat_t mat)
+ * \brief fonction qui reçoit la matrice et qui va permettre la saisie  de l'utilisateur
+*/
+
+void saisie(mat_t mat){
 
 	int deb1,deb2,fin1,fin2;
 	int id;
@@ -180,13 +207,13 @@ int saisie(mat_t mat){
 	do{
 	printf("veuillez saisir l'adresse du DEBUT en commencent par le numéro de ligne puis le numéro de colonne : ");
 	scanf("%i%i",&deb1,&deb2);
-	}while(deb1>=N||deb2>=M||deb1<0||deb2<0);
+	}while(deb1>=mat.nbl||deb2>=mat.nbc||deb1<0||deb2<0);
 
 	
 	do{
 	printf("veuillez saisir l'adresse de FIN en commencent par le numéro de ligne puis le numéro de colonne  : ");
 	scanf("%i%i",&fin1,&fin2);
-	}while(fin1>=N||fin2>=M||fin1<0||fin2<0);
+	}while(fin1>=mat.nbl||fin2>=mat.nbc||fin1<0||fin2<0);
 
 
 	trouver=mot_trouver(deb1,deb2,fin1,fin2,mat);
@@ -204,12 +231,26 @@ int saisie(mat_t mat){
 	else printf("looser ce n'est pas le bon mot \n");	
 }
 
+/**
+ * \fn void ajout_mot(char * mot)
+ * \brief fonction qui reçoit un mot alloue de la place dans la liste de mot et l'ajoute 
+ * \param mot à ajouter
+*/
+
 void ajout_mot(char * mot)
 {
 	listeMot[nbliste] = malloc (strlen (mot) + 1);
 	strcpy(listeMot[nbliste],mot);
 	nbliste++;
 }
+
+
+/**
+ * \fn void remplissage(mat_t mat)
+ * \brief fonction qui intervient après la génération aléatoire et va combler tous les endroit où il n'y a pas encore de lettre en prenant en compte la fréquence de ces lettre dans la langue française
+ * \param matrice
+*/
+
 
 void remplissage(mat_t mat){
 	int i,j;
@@ -220,8 +261,8 @@ void remplissage(mat_t mat){
 	char alphabet3[] = "QYXJKWZ";	   	 //lettre d'une fréquence inférieur à 1%
 	srand(time(NULL));
    
-	for(i=0;i<N;i++){
-	   	for(j=0;j<M;j++){
+	for(i=0;i<mat.nbl;i++){
+	   	for(j=0;j<mat.nbc;j++){
 	   	   	if(mat.val[i][j]=='0'){
 				frec=rand()%3;
 				if(frec!=0){
@@ -244,6 +285,12 @@ void remplissage(mat_t mat){
 	   	}
 	}
 }
+
+/**
+ * \fn int transfert()
+ * \brief fonction qui ne sert qu'a renvoyer le nombre de mot restant dans la liste
+ * \return entier
+*/
 
 int transfert(){
 	return nbliste;

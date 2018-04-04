@@ -6,7 +6,10 @@
 int main(){
 
 int nbliste=1;
-int niv,X,Y;
+int niv;
+int X=0;
+int Y=0;
+
 	do{
 	printf("\nquelle niveau voulez vous pour votre jeu : 1 pour facile 2 pour normal et 3 pour difficile\n");
 	scanf("%i", &niv);

@@ -1,26 +1,32 @@
+
+FLAGS=-Wall -g
+
 principal: matrice.o direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o principal.o
-	gcc matrice.o direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o principal.o -o principal 
+	gcc matrice.o direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o principal.o -o principal $(FLAGS)
 
 matrice.o:matrice.c
-	gcc -c matrice.c
+	gcc -c matrice.c $(FLAGS)
 	
 direction.o:direction.c
-	gcc -c direction.c
+	gcc -c direction.c $(FLAGS)
 	
 mot_mat.o:mot_mat.c
-	gcc -c mot_mat.c
+	gcc -c mot_mat.c $(FLAGS)
 	
 outil.o: outil.c
-	gcc -c outil.c
+	gcc -c outil.c $(FLAGS)
 	
 mot.o: mot.c
-	gcc -c mot.c
+	gcc -c mot.c $(FLAGS)
 	
 premier_saisie.o: premier_saisie.c
-	gcc -c premier_saisie.c
+	gcc -c premier_saisie.c $(FLAGS)
 	
 generateur.o: generateur.c
-	gcc -c generateur.c
+	gcc -c generateur.c $(FLAGS)
 	
 principal.o: principal.c
-	gcc -c principal.c
+	gcc -c principal.c $(FLAGS)
+
+clean:
+	rm -f *.o
