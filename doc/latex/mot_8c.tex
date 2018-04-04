@@ -1,0 +1,126 @@
+\hypertarget{mot_8c}{}\section{Référence du fichier src/mot.c}
+\label{mot_8c}\index{src/mot.\+c@{src/mot.\+c}}
+
+
+\hyperlink{mot_8c}{mot.\+c} est un programme qui a les différentes fonction liés a la liste de mot de départ  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}mot.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}outil.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+Graphe des dépendances par inclusion de mot.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mot_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{mot_8c_a42ef0fd7fc52130cfabce01e354bafcf}{lire\+\_\+fichier} (void)\hypertarget{mot_8c_a42ef0fd7fc52130cfabce01e354bafcf}{}\label{mot_8c_a42ef0fd7fc52130cfabce01e354bafcf}
+
+\begin{DoxyCompactList}\small\item\em insere dans la liste de mot les mots qui sont dans liste\+\_\+ani.\+txt et ajoute le nombre de mot dans nbmot \end{DoxyCompactList}\item 
+void \hyperlink{mot_8c_a2f4a98d1769e42db09aa7f21510fc694}{lire\+\_\+tableau\+\_\+mots} (void)\hypertarget{mot_8c_a2f4a98d1769e42db09aa7f21510fc694}{}\label{mot_8c_a2f4a98d1769e42db09aa7f21510fc694}
+
+\begin{DoxyCompactList}\small\item\em affiche le tableau de mots \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{mot_8c_ad85e71b11082e12b093c501d7e0b6e48}{recup\+\_\+mot} (int i)
+\begin{DoxyCompactList}\small\item\em recupère le mot en i (donné en paramètre) \end{DoxyCompactList}\item 
+void {\bfseries supprime\+\_\+mot} (int i)\hypertarget{mot_8c_a16b1b712244b17c6c827a76e540af462}{}\label{mot_8c_a16b1b712244b17c6c827a76e540af462}
+
+\item 
+int \hyperlink{mot_8c_a5f23001bb152baec608bb8b78cebd03f}{taille\+\_\+mot} (int i)
+\begin{DoxyCompactList}\small\item\em return la taille du mot en i (donné en paramètre) \end{DoxyCompactList}\item 
+int \hyperlink{mot_8c_a08105e5667c64d7dc196d5ae8491705f}{alea\+\_\+mot} (void)
+\begin{DoxyCompactList}\small\item\em return la coordonnée d\textquotesingle{}un mot aléatoire \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ {\bfseries tableau\+Mot} \mbox{[}$\,$\mbox{]}\hypertarget{mot_8c_a767dea028f2214af9616d4a8706d83cc}{}\label{mot_8c_a767dea028f2214af9616d4a8706d83cc}
+
+\item 
+int {\bfseries nbmot} = 0\hypertarget{mot_8c_a4897be56ba743064cfb43d23397ad6bc}{}\label{mot_8c_a4897be56ba743064cfb43d23397ad6bc}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+\hyperlink{mot_8c}{mot.\+c} est un programme qui a les différentes fonction liés a la liste de mot de départ 
+
+... Documentation ...
+
+\begin{DoxyAuthor}{Auteur}
+T\+H\+O\+M\+AS Paul 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3 avril 2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{mot.\+c@{mot.\+c}!alea\+\_\+mot@{alea\+\_\+mot}}
+\index{alea\+\_\+mot@{alea\+\_\+mot}!mot.\+c@{mot.\+c}}
+\subsubsection[{\texorpdfstring{alea\+\_\+mot(void)}{alea_mot(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int alea\+\_\+mot (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{mot_8c_a08105e5667c64d7dc196d5ae8491705f}{}\label{mot_8c_a08105e5667c64d7dc196d5ae8491705f}
+
+
+return la coordonnée d\textquotesingle{}un mot aléatoire 
+
+\begin{DoxyReturn}{Renvoie}
+un int qui est la coordonné du mot 
+\end{DoxyReturn}
+\index{mot.\+c@{mot.\+c}!recup\+\_\+mot@{recup\+\_\+mot}}
+\index{recup\+\_\+mot@{recup\+\_\+mot}!mot.\+c@{mot.\+c}}
+\subsubsection[{\texorpdfstring{recup\+\_\+mot(int i)}{recup_mot(int i)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ recup\+\_\+mot (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{mot_8c_ad85e71b11082e12b093c501d7e0b6e48}{}\label{mot_8c_ad85e71b11082e12b093c501d7e0b6e48}
+
+
+recupère le mot en i (donné en paramètre) 
+
+supprime le mot en i (donné en paramètre)
+
+
+\begin{DoxyParams}{Paramètres}
+{\em i} & qui représente, la coordonnée dans le tableau ,du mot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un char $\ast$ qui est le mot
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Paramètres}
+{\em i} & qui représente ,la coordonnée dans le tableau ,du mot \\
+\hline
+\end{DoxyParams}
+\index{mot.\+c@{mot.\+c}!taille\+\_\+mot@{taille\+\_\+mot}}
+\index{taille\+\_\+mot@{taille\+\_\+mot}!mot.\+c@{mot.\+c}}
+\subsubsection[{\texorpdfstring{taille\+\_\+mot(int i)}{taille_mot(int i)}}]{\setlength{\rightskip}{0pt plus 5cm}int taille\+\_\+mot (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{mot_8c_a5f23001bb152baec608bb8b78cebd03f}{}\label{mot_8c_a5f23001bb152baec608bb8b78cebd03f}
+
+
+return la taille du mot en i (donné en paramètre) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em i} & qui représente, la coordonnée dans le tableau ,du mot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un int qui est la taille du mot 
+\end{DoxyReturn}

@@ -1,0 +1,267 @@
+\hypertarget{generateur_8c}{}\section{Référence du fichier src/generateur.c}
+\label{generateur_8c}\index{src/generateur.\+c@{src/generateur.\+c}}
+
+
+\hyperlink{generateur_8c}{generateur.\+c} est un liste de fonction qui sont utilisé pour générer le mot mélés sur lesquels jouer  
+
+
+{\ttfamily \#include \char`\"{}generateur.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de generateur.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generateur_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{generateur_8c_a968d1f30091e0590282aa664ffb64ab2}{coord\+\_\+valides} (int x, int y, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em fonction qui vérifie que les coordonnées données sont possible dans la matrice donnée \end{DoxyCompactList}\item 
+t\+\_\+direction \hyperlink{generateur_8c_adf533dc1f1f23ffd3878526a0ea66b85}{inserer} (char $\ast$mot, int i, int j, t\+\_\+direction direction, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em insere dans la matrice donnéaux coordonnées avec la direction le mot \end{DoxyCompactList}\item 
+\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} \hyperlink{generateur_8c_aee299ca0e78ef648178fe80ed386457b}{ajoutnonaleatoire} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em fonction qui insere bonjour en 7,6 direction est \end{DoxyCompactList}\item 
+int \hyperlink{generateur_8c_ab013f83f7e6a5283d51b51e38e0cf407}{parcours\+\_\+libre} (int coordX, int coordY, t\+\_\+direction direction, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat, int version)
+\begin{DoxyCompactList}\small\item\em fonction qui regarde la taille dans une direction donnée sans lettre \end{DoxyCompactList}\item 
+\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} \hyperlink{generateur_8c_a879f01824fc254fe52a02bb2a8d08f08}{insert\+\_\+premier\+\_\+mot} (char $\ast$mot, int i1, int j1, t\+\_\+direction direction, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em insere un mot sans verification \end{DoxyCompactList}\item 
+\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} \hyperlink{generateur_8c_a3fb49352563af510db6f0498ef690ff7}{premier\+\_\+mot} (char $\ast$mot, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em insere un mot avec des coordonnées et une direction alatoire \end{DoxyCompactList}\item 
+\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} \hyperlink{generateur_8c_afa1a4981599a2b3aa429e0cf59b6324a}{Placerlibre} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em insere un mot,de la liste des mots,le plus grand possible à l\textquotesingle{}endroit le plus grand possible \end{DoxyCompactList}\item 
+\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} {\bfseries Placer\+Mot} (\hyperlink{structmot__mat__s}{mot\+\_\+mat\+\_\+t} motmis, \hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)\hypertarget{generateur_8c_aff3285f1fae64c682e5365ac6b4f8296}{}\label{generateur_8c_aff3285f1fae64c682e5365ac6b4f8296}
+
+\item 
+void \hyperlink{generateur_8c_a2f70c890274c026e3429547bce6e42aa}{remplir\+\_\+final} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em insere dans tout les endroits où il n\textquotesingle{}y a pas de lettre une lettre aléatoire \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+\hyperlink{generateur_8c}{generateur.\+c} est un liste de fonction qui sont utilisé pour générer le mot mélés sur lesquels jouer 
+
+... Documentation ...
+
+\begin{DoxyAuthor}{Auteur}
+T\+H\+O\+M\+AS Paul B\+E\+N\+J\+A\+M\+IN Matthey 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3 avril 2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{generateur.\+c@{generateur.\+c}!ajoutnonaleatoire@{ajoutnonaleatoire}}
+\index{ajoutnonaleatoire@{ajoutnonaleatoire}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{ajoutnonaleatoire(mat\+\_\+t ma\+\_\+mat)}{ajoutnonaleatoire(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mot\+\_\+mat\+\_\+t} ajoutnonaleatoire (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_aee299ca0e78ef648178fe80ed386457b}{}\label{generateur_8c_aee299ca0e78ef648178fe80ed386457b}
+
+
+fonction qui insere bonjour en 7,6 direction est 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mot\+\_\+mat\+\_\+t 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!coord\+\_\+valides@{coord\+\_\+valides}}
+\index{coord\+\_\+valides@{coord\+\_\+valides}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{coord\+\_\+valides(int x, int y, mat\+\_\+t ma\+\_\+mat)}{coord_valides(int x, int y, mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}int coord\+\_\+valides (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_a968d1f30091e0590282aa664ffb64ab2}{}\label{generateur_8c_a968d1f30091e0590282aa664ffb64ab2}
+
+
+fonction qui vérifie que les coordonnées données sont possible dans la matrice donnée 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em x} & la Coordonné X qui équivaut a la colonne ciblé \\
+\hline
+{\em y} & la Coordonné Y qui équivaut a la ligne ciblé \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+vrai si les coordonnées sont valides faux sinon 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!inserer@{inserer}}
+\index{inserer@{inserer}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{inserer(char $\ast$mot, int i, int j, t\+\_\+direction direction, mat\+\_\+t ma\+\_\+mat)}{inserer(char *mot, int i, int j, t_direction direction, mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}t\+\_\+direction inserer (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{mot, }
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{t\+\_\+direction}]{direction, }
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_adf533dc1f1f23ffd3878526a0ea66b85}{}\label{generateur_8c_adf533dc1f1f23ffd3878526a0ea66b85}
+
+
+insere dans la matrice donnéaux coordonnées avec la direction le mot 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mot} & est un mot que l\textquotesingle{}on veut inserer \\
+\hline
+{\em i} & la Coordonné I qui équivaut a la colonne ciblé \\
+\hline
+{\em j} & la Coordonné J qui équivaut a la ligne ciblé \\
+\hline
+{\em direction} & est une direction \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la direction du mot qu\textquotesingle{}on a inserer 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!insert\+\_\+premier\+\_\+mot@{insert\+\_\+premier\+\_\+mot}}
+\index{insert\+\_\+premier\+\_\+mot@{insert\+\_\+premier\+\_\+mot}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{insert\+\_\+premier\+\_\+mot(char $\ast$mot, int i1, int j1, t\+\_\+direction direction, mat\+\_\+t ma\+\_\+mat)}{insert_premier_mot(char *mot, int i1, int j1, t_direction direction, mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mot\+\_\+mat\+\_\+t} insert\+\_\+premier\+\_\+mot (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{mot, }
+\item[{int}]{i1, }
+\item[{int}]{j1, }
+\item[{t\+\_\+direction}]{direction, }
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_a879f01824fc254fe52a02bb2a8d08f08}{}\label{generateur_8c_a879f01824fc254fe52a02bb2a8d08f08}
+
+
+insere un mot sans verification 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mot} & est me mot \\
+\hline
+{\em i1} & represente la la colonne ou l\textquotesingle{}on va commencer la recherche \\
+\hline
+{\em j1} & represente la la ligne ou l\textquotesingle{}on va commencer la recherche \\
+\hline
+{\em direction} & represente la direction ou l\textquotesingle{}on va inserer \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mot\+\_\+mat\+\_\+t 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!parcours\+\_\+libre@{parcours\+\_\+libre}}
+\index{parcours\+\_\+libre@{parcours\+\_\+libre}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{parcours\+\_\+libre(int coord\+X, int coord\+Y, t\+\_\+direction direction, mat\+\_\+t ma\+\_\+mat, int version)}{parcours_libre(int coordX, int coordY, t_direction direction, mat_t ma_mat, int version)}}]{\setlength{\rightskip}{0pt plus 5cm}int parcours\+\_\+libre (
+\begin{DoxyParamCaption}
+\item[{int}]{coordX, }
+\item[{int}]{coordY, }
+\item[{t\+\_\+direction}]{direction, }
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat, }
+\item[{int}]{version}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_ab013f83f7e6a5283d51b51e38e0cf407}{}\label{generateur_8c_ab013f83f7e6a5283d51b51e38e0cf407}
+
+
+fonction qui regarde la taille dans une direction donnée sans lettre 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em coordX} & represente la colonne ou l\textquotesingle{}on va commencer la recherche \\
+\hline
+{\em coordX} & represente la ligne ou l\textquotesingle{}on va commencer la recherche \\
+\hline
+{\em direction} & represente la direction ou l\textquotesingle{}on va rechercher. définie dans \hyperlink{direction_8h_source}{direction.\+h} \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice qui a été définie dans \hyperlink{matrice_8h_source}{matrice.\+h} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un int qui correspont a la taille disponible 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!Placerlibre@{Placerlibre}}
+\index{Placerlibre@{Placerlibre}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{Placerlibre(mat\+\_\+t ma\+\_\+mat)}{Placerlibre(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mot\+\_\+mat\+\_\+t} Placerlibre (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_afa1a4981599a2b3aa429e0cf59b6324a}{}\label{generateur_8c_afa1a4981599a2b3aa429e0cf59b6324a}
+
+
+insere un mot,de la liste des mots,le plus grand possible à l\textquotesingle{}endroit le plus grand possible 
+
+essaye d\textquotesingle{}inserer un mot ayant un lettre commune avec le mot déjà mis si il y a assez de place
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mot\+\_\+mat\+\_\+t
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Paramètres}
+{\em motmis} & represente un mot dans une matrice \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mot\+\_\+mat\+\_\+t 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!premier\+\_\+mot@{premier\+\_\+mot}}
+\index{premier\+\_\+mot@{premier\+\_\+mot}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{premier\+\_\+mot(char $\ast$mot, mat\+\_\+t ma\+\_\+mat)}{premier_mot(char *mot, mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mot\+\_\+mat\+\_\+t} premier\+\_\+mot (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{mot, }
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_a3fb49352563af510db6f0498ef690ff7}{}\label{generateur_8c_a3fb49352563af510db6f0498ef690ff7}
+
+
+insere un mot avec des coordonnées et une direction alatoire 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mot} & est me mot \\
+\hline
+{\em i1} & represente la la colonne ou l\textquotesingle{}on va commencer l\textquotesingle{}insertion \\
+\hline
+{\em j1} & represente la la ligne ou l\textquotesingle{}on va commencer l\textquotesingle{}insertion \\
+\hline
+{\em direction} & represente la direction ou l\textquotesingle{}on va inserer \\
+\hline
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mot\+\_\+mat\+\_\+t 
+\end{DoxyReturn}
+\index{generateur.\+c@{generateur.\+c}!remplir\+\_\+final@{remplir\+\_\+final}}
+\index{remplir\+\_\+final@{remplir\+\_\+final}!generateur.\+c@{generateur.\+c}}
+\subsubsection[{\texorpdfstring{remplir\+\_\+final(mat\+\_\+t ma\+\_\+mat)}{remplir_final(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}void remplir\+\_\+final (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{generateur_8c_a2f70c890274c026e3429547bce6e42aa}{}\label{generateur_8c_a2f70c890274c026e3429547bce6e42aa}
+
+
+insere dans tout les endroits où il n\textquotesingle{}y a pas de lettre une lettre aléatoire 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & represente une matrice \\
+\hline
+\end{DoxyParams}

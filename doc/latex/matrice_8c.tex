@@ -1,0 +1,117 @@
+\hypertarget{matrice_8c}{}\section{Référence du fichier src/matrice.c}
+\label{matrice_8c}\index{src/matrice.\+c@{src/matrice.\+c}}
+
+
+\hyperlink{matrice_8c}{matrice.\+c} comporte toute les fonction utiles a la gestion de la matrice  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}matrice.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de matrice.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{matrice_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structmat__s}{mat\+\_\+t} \hyperlink{matrice_8c_ad6b0d2064b87d7ad3c6c75956926ee84}{creer\+\_\+matrice} (int ligne, int colonne)
+\begin{DoxyCompactList}\small\item\em fonction qui creer et renvoie une matrice de taille ligne colonne \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_a75eba94bc87bee53fd97eb008b60fd50}{affiche\+\_\+matrice} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em fonction qui affihce la matrice \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_a778779438efc31f0f0fa189da1833094}{init\+\_\+matrice} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em fonction qui met dans toutes les case de la matrice en parametre \textquotesingle{}0\textquotesingle{} \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_aa09533da46485f5387d2fd2b411f81b9}{supprim\+\_\+mat} (\hyperlink{structmat__s}{mat\+\_\+t} ma\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em fonction qui supprime la matrice \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+\hyperlink{matrice_8c}{matrice.\+c} comporte toute les fonction utiles a la gestion de la matrice 
+
+\begin{DoxyAuthor}{Auteur}
+T\+H\+O\+M\+AS Paul 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3 avril 2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{matrice.\+c@{matrice.\+c}!affiche\+\_\+matrice@{affiche\+\_\+matrice}}
+\index{affiche\+\_\+matrice@{affiche\+\_\+matrice}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{\texorpdfstring{affiche\+\_\+matrice(mat\+\_\+t ma\+\_\+mat)}{affiche_matrice(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat\+\_\+t} affiche\+\_\+matrice (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{matrice_8c_a75eba94bc87bee53fd97eb008b60fd50}{}\label{matrice_8c_a75eba94bc87bee53fd97eb008b60fd50}
+
+
+fonction qui affihce la matrice 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & est la matrice que l\textquotesingle{}on veut afficher \\
+\hline
+\end{DoxyParams}
+\index{matrice.\+c@{matrice.\+c}!creer\+\_\+matrice@{creer\+\_\+matrice}}
+\index{creer\+\_\+matrice@{creer\+\_\+matrice}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{\texorpdfstring{creer\+\_\+matrice(int ligne, int colonne)}{creer_matrice(int ligne, int colonne)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat\+\_\+t} creer\+\_\+matrice (
+\begin{DoxyParamCaption}
+\item[{int}]{ligne, }
+\item[{int}]{colonne}
+\end{DoxyParamCaption}
+)}\hypertarget{matrice_8c_ad6b0d2064b87d7ad3c6c75956926ee84}{}\label{matrice_8c_ad6b0d2064b87d7ad3c6c75956926ee84}
+
+
+fonction qui creer et renvoie une matrice de taille ligne colonne 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ligne} & est le nombre de ligne que l\textquotesingle{}on veux dans la matrice \\
+\hline
+{\em colonne} & est le nombre de colonne que l\textquotesingle{}on veux dans la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une variable de type mat\+\_\+t \+: une matrice 
+\end{DoxyReturn}
+\index{matrice.\+c@{matrice.\+c}!init\+\_\+matrice@{init\+\_\+matrice}}
+\index{init\+\_\+matrice@{init\+\_\+matrice}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{\texorpdfstring{init\+\_\+matrice(mat\+\_\+t ma\+\_\+mat)}{init_matrice(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+matrice (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{matrice_8c_a778779438efc31f0f0fa189da1833094}{}\label{matrice_8c_a778779438efc31f0f0fa189da1833094}
+
+
+fonction qui met dans toutes les case de la matrice en parametre \textquotesingle{}0\textquotesingle{} 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & est la matrice que l\textquotesingle{}on veut initialiser \\
+\hline
+\end{DoxyParams}
+\index{matrice.\+c@{matrice.\+c}!supprim\+\_\+mat@{supprim\+\_\+mat}}
+\index{supprim\+\_\+mat@{supprim\+\_\+mat}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{\texorpdfstring{supprim\+\_\+mat(mat\+\_\+t ma\+\_\+mat)}{supprim_mat(mat_t ma_mat)}}]{\setlength{\rightskip}{0pt plus 5cm}void supprim\+\_\+mat (
+\begin{DoxyParamCaption}
+\item[{{\bf mat\+\_\+t}}]{ma\+\_\+mat}
+\end{DoxyParamCaption}
+)}\hypertarget{matrice_8c_aa09533da46485f5387d2fd2b411f81b9}{}\label{matrice_8c_aa09533da46485f5387d2fd2b411f81b9}
+
+
+fonction qui supprime la matrice 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ma\+\_\+mat} & est la matrice que l\textquotesingle{}on veut supprimer \\
+\hline
+\end{DoxyParams}

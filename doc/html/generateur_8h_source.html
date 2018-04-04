@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>projet mot mélés:  Fichier source de src/generateur.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">projet mot mélés
+   </div>
+   <div id="projectbrief">projet ayant pour but de générer et pouvoir jouer a un mot mélés</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">generateur.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include&lt;stdio.h&gt;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include&lt;stdlib.h&gt;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include&lt;string.h&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include&lt;time.h&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include&quot;premier_saisie.h&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include&quot;mot_mat.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include&quot;mot.h&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> PlacerMot(<a class="code" href="structmot__mat__s.html">mot_mat_t</a> motmis,<a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">int</span> <a class="code" href="generateur_8c.html#a968d1f30091e0590282aa664ffb64ab2">coord_valides</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;t_direction <a class="code" href="generateur_8c.html#adf533dc1f1f23ffd3878526a0ea66b85">inserer</a>(<span class="keywordtype">char</span> * mot,<span class="keywordtype">int</span> i,<span class="keywordtype">int</span> j,t_direction direction, <a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> <a class="code" href="generateur_8c.html#aee299ca0e78ef648178fe80ed386457b">ajoutnonaleatoire</a>(<a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">int</span> <a class="code" href="generateur_8c.html#ab013f83f7e6a5283d51b51e38e0cf407">parcours_libre</a>(<span class="keywordtype">int</span> coordX,<span class="keywordtype">int</span> coordY,t_direction direction,  <a class="code" href="structmat__s.html">mat_t</a> ma_mat,<span class="keywordtype">int</span> version);</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> <a class="code" href="generateur_8c.html#a879f01824fc254fe52a02bb2a8d08f08">insert_premier_mot</a>(<span class="keywordtype">char</span> * mot,<span class="keywordtype">int</span> i1,<span class="keywordtype">int</span> j1,t_direction direction,<a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> <a class="code" href="generateur_8c.html#a3fb49352563af510db6f0498ef690ff7">premier_mot</a>(<span class="keywordtype">char</span> * mot, <a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> <a class="code" href="generateur_8c.html#afa1a4981599a2b3aa429e0cf59b6324a">Placerlibre</a>(<a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<a class="code" href="structmot__mat__s.html">mot_mat_t</a> PlacerMot(<a class="code" href="structmot__mat__s.html">mot_mat_t</a> motmis, <a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generateur_8c.html#a2f70c890274c026e3429547bce6e42aa">remplir_final</a>(<a class="code" href="structmat__s.html">mat_t</a> ma_mat);</div><div class="ttc" id="structmot__mat__s_html"><div class="ttname"><a href="structmot__mat__s.html">mot_mat_s</a></div><div class="ttdef"><b>Definition:</b> mot_mat.h:3</div></div>
+<div class="ttc" id="generateur_8c_html_aee299ca0e78ef648178fe80ed386457b"><div class="ttname"><a href="generateur_8c.html#aee299ca0e78ef648178fe80ed386457b">ajoutnonaleatoire</a></div><div class="ttdeci">mot_mat_t ajoutnonaleatoire(mat_t ma_mat)</div><div class="ttdoc">fonction qui insere bonjour en 7,6 direction est </div><div class="ttdef"><b>Definition:</b> generateur.c:116</div></div>
+<div class="ttc" id="generateur_8c_html_a2f70c890274c026e3429547bce6e42aa"><div class="ttname"><a href="generateur_8c.html#a2f70c890274c026e3429547bce6e42aa">remplir_final</a></div><div class="ttdeci">void remplir_final(mat_t ma_mat)</div><div class="ttdoc">insere dans tout les endroits où il n&amp;#39;y a pas de lettre une lettre aléatoire </div><div class="ttdef"><b>Definition:</b> generateur.c:384</div></div>
+<div class="ttc" id="generateur_8c_html_a3fb49352563af510db6f0498ef690ff7"><div class="ttname"><a href="generateur_8c.html#a3fb49352563af510db6f0498ef690ff7">premier_mot</a></div><div class="ttdeci">mot_mat_t premier_mot(char *mot, mat_t ma_mat)</div><div class="ttdoc">insere un mot avec des coordonnées et une direction alatoire </div><div class="ttdef"><b>Definition:</b> generateur.c:205</div></div>
+<div class="ttc" id="structmat__s_html"><div class="ttname"><a href="structmat__s.html">mat_s</a></div><div class="ttdef"><b>Definition:</b> matrice.h:1</div></div>
+<div class="ttc" id="generateur_8c_html_adf533dc1f1f23ffd3878526a0ea66b85"><div class="ttname"><a href="generateur_8c.html#adf533dc1f1f23ffd3878526a0ea66b85">inserer</a></div><div class="ttdeci">t_direction inserer(char *mot, int i, int j, t_direction direction, mat_t ma_mat)</div><div class="ttdoc">insere dans la matrice donnéaux coordonnées avec la direction le mot </div><div class="ttdef"><b>Definition:</b> generateur.c:88</div></div>
+<div class="ttc" id="generateur_8c_html_a968d1f30091e0590282aa664ffb64ab2"><div class="ttname"><a href="generateur_8c.html#a968d1f30091e0590282aa664ffb64ab2">coord_valides</a></div><div class="ttdeci">int coord_valides(int x, int y, mat_t ma_mat)</div><div class="ttdoc">fonction qui vérifie que les coordonnées données sont possible dans la matrice donnée ...</div><div class="ttdef"><b>Definition:</b> generateur.c:20</div></div>
+<div class="ttc" id="generateur_8c_html_ab013f83f7e6a5283d51b51e38e0cf407"><div class="ttname"><a href="generateur_8c.html#ab013f83f7e6a5283d51b51e38e0cf407">parcours_libre</a></div><div class="ttdeci">int parcours_libre(int coordX, int coordY, t_direction direction, mat_t ma_mat, int version)</div><div class="ttdoc">fonction qui regarde la taille dans une direction donnée sans lettre </div><div class="ttdef"><b>Definition:</b> generateur.c:134</div></div>
+<div class="ttc" id="generateur_8c_html_afa1a4981599a2b3aa429e0cf59b6324a"><div class="ttname"><a href="generateur_8c.html#afa1a4981599a2b3aa429e0cf59b6324a">Placerlibre</a></div><div class="ttdeci">mot_mat_t Placerlibre(mat_t ma_mat)</div><div class="ttdoc">insere un mot,de la liste des mots,le plus grand possible à l&amp;#39;endroit le plus grand possible ...</div><div class="ttdef"><b>Definition:</b> generateur.c:226</div></div>
+<div class="ttc" id="generateur_8c_html_a879f01824fc254fe52a02bb2a8d08f08"><div class="ttname"><a href="generateur_8c.html#a879f01824fc254fe52a02bb2a8d08f08">insert_premier_mot</a></div><div class="ttdeci">mot_mat_t insert_premier_mot(char *mot, int i1, int j1, t_direction direction, mat_t ma_mat)</div><div class="ttdoc">insere un mot sans verification </div><div class="ttdef"><b>Definition:</b> generateur.c:171</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
