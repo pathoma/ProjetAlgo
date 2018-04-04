@@ -1,0 +1,76 @@
+I-Explication et compréhension des règles du jeu et de ce qu'on attend de nous.
+
+
+	-une matrice contenant les mots mélés (avec des indices sur le bord gauche et haut pour facilité la localisation d'une lettre par le joueur).
+
+	-un tableau représentant la liste des mots à chercher dans la matrices précédente avec chaque mot indexé par une ID pour permettre au joueur de précisé quel mots il à trouvé.
+
+	-chaque endroit dans la matrice où il n'y aurait pas de lettre serais comblé par une lettre aléatoirement.
+
+	-caractéristique de notre jeu: 
+				-la matrice de mots mélé et la liste des mots a trouvé devront tout deux apparaitre.
+				-seul la liste de mots à trouvé subira des modification pendant la partie (quand le joueur trouvera un mot,ce mot disparaitra de la liste et quand cette liste sera vide la partie sera gagné
+
+	-faire une fichier contenant plusieurs liste (donc plusieurs version de mots mélé) donnant donc une durée de vie plus élevé au jeu.
+
+	- Le programme devra donc poser deux questions aux joueur a chaque tour : 
+									-Quel mot avez vous trouvé? :
+									-de quel emplacement à quel emplacement ?(début à fin) :
+	
+	-Un fichier contenant une liste de mots(tout les mots du dictionnaires) puis la programme prendra des mots aléatoirement pour combler un maximum la matrice, et affichera les mots séléectionne dans la liste des mots à trouver.
+
+	-Bonus : Dictionnaire mot Français,anglais, etc....
+
+
+
+II-Grand point à aborder dans le codage:
+
+
+	-1: Génarateur de matrice(qui va placer les mots dans la matrice et les entre-mélés).
+		-une fonction aléatoire ou plusieurs semi-aléatoire qui seront tiré au sort a chaque 			début de partie.
+
+	-2: Liaison entre le programe principal et un fichier contenant un dictionnaire de mot.
+
+
+	-3: Outil de comparaison entre le mot choisi et le mot trouvé. (3 types de comparaison)
+		
+		- Type horizontal:
+
+		- Type vertical:
+
+		- Type diagonal:
+			
+
+
+III- idée générateur (pseudo aléatoire) :
+
+
+Premier mot:
+
+	-copier la liste du fichier dans un tableau ensuite sortir la taille du tableau N et faire un tirage aléatoire de 0 à N pour avoir un premier mot aléatoire à placer dans la grille.
+
+	-5 position (haut gauche, haut droit, bas gauche,bas droit, milieu) tirage aléatoire de 1 à 5 pour savoir où mettre ce premier mot.
+
+	-ensuite à l'endroit ou à l'envers (0 ou 1) tirage au sort qui fera utiliser ou non la fonction inversion.
+
+	-selon la position tirée au sort précédemment 3 direction seront possible (sauf pour le milieu qui en aura 8) par exemple haut gauche : direction vertical bas, horizontal droit ou diagonal bas droit.
+	
+
+Mot suivant:
+
+	
+	-On prend le premier mot et on tire au sort une de ses lettres, ensuite on cherche tous les mot de la liste commencant par cette lettre puis on tire au sort un de ces mots.
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

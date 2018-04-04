@@ -1,32 +1,40 @@
 
-FLAGS=-Wall -g
+CC=gcc
 
-principal: matrice.o direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o principal.o
-	gcc matrice.o direction.o mot_mat.o outil.o mot.o premier_saisie.o generateur.o principal.o -o principal $(FLAGS)
+SRCDIR=src
+OBJDIR=build
+
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJECTS2 := $(OBJDIR)/matrice.o $(OBJDIR)/direction.o $(OBJDIR)/mot_mat.o $(OBJDIR)/outil.o $(OBJDIR)/mot.o $(OBJDIR)/premier_saisie.o $(OBJDIR)/generateur.o $(OBJDIR)/principal.o
+
+
+
+#SDL_DIR=$(HOME)/Documents/git_projet/ProjetAlgo/src/SDL2-2.0.3/SDL2
+#SDLLIB_DIR=${SDL_DIR}/lib
+#SDLINC_DIR=${SDL_DIR}/include
+
+#LIBS=-L${SDLLIB_DIR} -lSDL2 -lSDL2_ttf 
+#-lSDL2_image
+#INCLUDES=-I${SDLINC_DIR} 
+
+
+PROG_NAME = prog
+SDL_NAME = sdl_test 
+
+all: $(PROG_NAME) 
+#$(SDL_NAME)
+
+#$(SDL_NAME):$(OBJECTS)
+#	${CC} $(OBJECTS) -o $(SDL_NAME)
+
+$(PROG_NAME): $(OBJECTS2) 
+	${CC} $(OBJECTS2) -o $(PROG_NAME)
+
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiled "$<" successfully!"
 
 matrice.o:matrice.c
 	gcc -c matrice.c $(FLAGS)
-	
-direction.o:direction.c
-	gcc -c direction.c $(FLAGS)
-	
-mot_mat.o:mot_mat.c
-	gcc -c mot_mat.c $(FLAGS)
-	
-outil.o: outil.c
-	gcc -c outil.c $(FLAGS)
-	
-mot.o: mot.c
-	gcc -c mot.c $(FLAGS)
-	
-premier_saisie.o: premier_saisie.c
-	gcc -c premier_saisie.c $(FLAGS)
-	
-generateur.o: generateur.c
-	gcc -c generateur.c $(FLAGS)
-	
-principal.o: principal.c
-	gcc -c principal.c $(FLAGS)
-
-clean:
-	rm -f *.o
