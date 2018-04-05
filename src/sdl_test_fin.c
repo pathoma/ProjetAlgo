@@ -84,13 +84,15 @@ int main(int argc, char ** argv)
 	int dim_menu_w=0;
 	int X=20,Y=20;
 	int compteur=0;
-	int x1=0,x2=0;
+	int x1,x2,y1,y2;
+	int click=0;
+	char* trouver;
 		
 	
  	int space_bet_w=Wcase+5;	//5px entre chaque case
 	int space_bet_h=Hcase+5;
- 	int dimWinW=nbCol*space_bet_w+500;
- 	int dimWinH=nbRow*space_bet_h+300;
+ 	int dimWinW=20*space_bet_w+500;
+ 	int dimWinH=20*space_bet_h+200;
  	
  	
  	
@@ -101,7 +103,7 @@ int main(int argc, char ** argv)
 	int longueur_liste=40;
 	char *chaine_menu[11]={"Mots-Melees","START","THEMES","Difficulte","Animaux","Themes2","Theme3","FACILE","NORMAL","DIFFICILE","Lancer la partie"};
 	int longueur_chaine=11;
-	int difficulte,theme=0;
+	int difficulte=1,theme=0;
  	
 
  	char *mat_alphabet[26]={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};// 	/!\ mat_alphabet[0]='A'
@@ -155,6 +157,8 @@ int main(int argc, char ** argv)
 	//On initialise les couleurs
 	SDL_Color blackColor = {0,0,0};
 	SDL_Color redColor = {255,0,0};
+	SDL_Color backgroundColor = {255,255,100};
+	
 	//On initialise les surfaces et les textures
 	
 	SDL_Texture *textures[26];
@@ -180,19 +184,13 @@ int main(int argc, char ** argv)
 
 	 SDL_Texture *textures_mots[39];
 
-		for(i=0;i<nbliste2;i++){
-			SDL_Surface * surface = TTF_RenderText_Blended(font2,  tableauMot[i], blackColor);
-
-			textures_mots[i] = SDL_CreateTextureFromSurface(renderer, surface);
-			SDL_FreeSurface( surface);
-
-		}
+		
 		
 		
 	
 			
 
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+	SDL_SetRenderDrawColor(renderer,255,255,255,0);
 	SDL_RenderClear( renderer );
 
 	
@@ -202,25 +200,25 @@ int main(int argc, char ** argv)
 SDL_Rect rect_menu;
 			rect_menu.w = 300; 
 			rect_menu.h = 100;
-			rect_menu.y = 50;
-			rect_menu.x = 150;
+			rect_menu.y = 200;
+			rect_menu.x = (dimWinW/2)-rect_menu.w/2;
 
 SDL_Rect rect_menu2; 		
 			rect_menu2.w = 250; 
 			rect_menu2.h = 100;
-			rect_menu2.y = 200;
-			rect_menu2.x = 150;
+			rect_menu2.y = 500;
+			rect_menu2.x = (dimWinW/2)-rect_menu2.w/2;
 			
 SDL_Rect rect_menu3;
 			rect_menu3.w = 150; 
 			rect_menu3.h = 50;
-			rect_menu3.y = 20;
-			rect_menu3.x = 200;
+			rect_menu3.y = 220;
+			rect_menu3.x = (dimWinW/2)-rect_menu3.w/2;
 SDL_Rect rect_menu4; 		
 			rect_menu4.w = 200; 
 			rect_menu4.h = 50;
-			rect_menu4.y = 200;
-			rect_menu4.x = 200;
+			rect_menu4.y = 400;
+			rect_menu4.x = (dimWinW/2)-rect_menu3.w/2;
 			
 SDL_Rect rect_menu5[3];
 SDL_Rect rect_menu6[3]; //on a trois niveaux de diff
@@ -234,7 +232,7 @@ SDL_Rect rect2[longueur_liste];
 				
 	if(fen == 1){
  			
- 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+ 		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 		SDL_RenderClear(renderer);
 		
 		
@@ -244,14 +242,14 @@ SDL_Rect rect2[longueur_liste];
 		SDL_QueryTexture(textures_menu[0], NULL, NULL, &dim_menu_w, &dim_menu_h);
 
 
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 	
 		
 
 		SDL_RenderFillRect(renderer,&rect_menu);
 		SDL_RenderCopy(renderer,textures_menu[0],NULL,&rect_menu);
 		
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 		
 		
 			
@@ -270,21 +268,21 @@ SDL_Rect rect2[longueur_liste];
  	
  	
  		if(fen == 2){
- 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+ 		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 		SDL_RenderClear(renderer);
 		
 		
 		SDL_QueryTexture(textures_menu[0], NULL, NULL, &dim_menu_w, &dim_menu_h);
 
 
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 	
 		
 
 		SDL_RenderFillRect(renderer,&rect_menu3);
 		SDL_RenderCopy(renderer,textures_menu[2],NULL,&rect_menu3);
 		
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 		
 			
 		SDL_RenderFillRect(renderer,&rect_menu4);
@@ -292,41 +290,41 @@ SDL_Rect rect2[longueur_liste];
 		
 		
 		
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 		 //on a trois themes differents	
 			
 		
 		for(int i=0;i<3;i++){
 			rect_menu5[i].w = 150; 
 			rect_menu5[i].h = 40;
-			rect_menu5[i].y = 100;
-			rect_menu5[i].x = 70+i*170;
+			rect_menu5[i].y = 300;
+			rect_menu5[i].x = (dimWinW/2)-3*rect_menu5[i].w/2+i*170;
 			
 			SDL_RenderFillRect(renderer,&rect_menu5[i]);
 			SDL_RenderCopy(renderer,textures_menu[i+4],NULL,&rect_menu5[i]);
 		}
 		
 		
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 				
 			
 			
 		for(int i=0;i<3;i++){
 			rect_menu6[i].w = 150; 
 			rect_menu6[i].h = 40;
-			rect_menu6[i].y = 290;
-			rect_menu6[i].x = 70+i*170;
+			rect_menu6[i].y = 490;
+			rect_menu6[i].x = (dimWinW/2)-3*rect_menu6[i].w/2+i*170;
 			
 			SDL_RenderFillRect(renderer,&rect_menu6[i]);
 			SDL_RenderCopy(renderer,textures_menu[i+7],NULL,&rect_menu6[i]);
 		}
 		
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 
 			rect_menu7.w = 250; 
 			rect_menu7.h = 50;
-			rect_menu7.y = 370;
-			rect_menu7.x = 200;
+			rect_menu7.y = 800;
+			rect_menu7.x = (dimWinW/2)-rect_menu7.w/2;
 			
 		SDL_RenderFillRect(renderer,&rect_menu7);
 		SDL_RenderCopy(renderer,textures_menu[10],NULL,&rect_menu7);
@@ -364,9 +362,7 @@ SDL_Rect rect2[longueur_liste];
 				mat_t ma_mat= creer_matrice(X,Y);
 	
 				init_matrice(ma_mat);	
-				fprintf(stderr, "00000000000000\n");
 				lire_fichier();
-				fprintf(stderr, "333333333333\n");
 				int valeur=alea_mot();
 				mot_mat_t monmot=premier_mot(recup_mot(valeur),ma_mat);
 				supprime_mot(valeur);
@@ -375,12 +371,11 @@ SDL_Rect rect2[longueur_liste];
 					if(monmot.ligne!=-1)
 					{
 						monmot=PlacerMot(monmot,ma_mat);
-						fprintf(stderr, "2222222222\n");
 					}
 					else
 					{
 						monmot=Placerlibre(ma_mat);
-						fprintf(stderr, "11111111\n");
+						
 					}
 					
 				}
@@ -398,31 +393,32 @@ SDL_Rect rect2[longueur_liste];
 
 			textures_mots[i] = SDL_CreateTextureFromSurface(renderer, surface);
 			SDL_FreeSurface( surface);
-
+			//printf("le tableau de mot est %s\n",tableauMot[i]);
 		}
+		
  
  
  
 			
  			
 			SDL_RenderClear( renderer );
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+			SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);
 
  	
 	 	/*Creation des cases			<-- Changement des parametres	*/
 	
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0);
+		SDL_SetRenderDrawColor(renderer, 230, 130, 60, 0);
 	
 			SDL_Rect rect_liste;
 				rect_liste.x = 20;
 				rect_liste.y = 100;
-				rect_liste.w = (space_bet_w*X)*0.3;
+				rect_liste.w = (space_bet_w*X)*0.4;
 				rect_liste.h = space_bet_h*Y;
 		
 		SDL_RenderFillRect(renderer,&rect_liste);
 
 		
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0); 
+		SDL_SetRenderDrawColor(renderer, 230, 130, 60, 0); 
 		
 		
 			
@@ -433,7 +429,7 @@ SDL_Rect rect2[longueur_liste];
 				rect2[i].w = 80; 
 				rect2[i].h = 20;
 				rect2[i].y = 120+i*24;
-				rect2[i].x = 30;
+				rect2[i].x = 40;
 				
 				SDL_RenderFillRect(renderer,&rect2[i]);
 				SDL_RenderCopy(renderer,textures_mots[i],NULL,&rect2[i]);
@@ -454,7 +450,7 @@ SDL_Rect rect2[longueur_liste];
 		}*/
 	
 	
-		SDL_SetRenderDrawColor(renderer, 255, 255, 100, 0);  //		<--couleur case fond
+		SDL_SetRenderDrawColor(renderer, 255,255,200,0);  //		<--couleur case fond
 compteur=0;		
 
 		//SDL_Rect rect[X*Y];
@@ -467,7 +463,7 @@ compteur=0;
 				//fprintf(stderr, "nbascii[%d][%d]=%d\n", j, i, nbAscii);
 				rect[compteur].w = 30; 
 				rect[compteur].h = 30;  
-				rect[compteur].x = 300+i*35; //Extreme left of the window
+				rect[compteur].x = 350+i*35; //Extreme left of the window
 				rect[compteur].y = 100+j*35; //Very bottom of the window
 				
 				SDL_RenderFillRect(renderer,&rect[compteur]);
@@ -523,8 +519,19 @@ compteur=0;
                             
                             if(fen == 4){
                             	for(i=0;i<X*Y;i++){
-                            		if(event.button.x>rect[i].x  &&  event.button.x<rect[i].x+rect[i].w  &&  event.button.y>rect[i].y  &&  event.button.y<rect[i].y+rect[i].h){printf("----o-----");}
-                            	}
+                            		switch(click){
+                            			case 0:
+                            				if(event.button.x>rect[i].x  &&  event.button.x<rect[i].x+rect[i].w  &&  event.button.y>rect[i].y  &&  event.button.y<rect[i].y+rect[i].h){
+                            			printf("----E1-----");
+                            			 x1 = ((event.button.x-350)/34);y1 = ((event.button.y-100)/34);fprintf(stdout,"La position de x1= %d et y1= %d\n", x1 , y1);click=1;}break;
+                            		
+                            			case 1:
+                            				if(event.button.x>rect[i].x  &&  event.button.x<rect[i].x+rect[i].w  &&  event.button.y>rect[i].y  &&  event.button.y<rect[i].y+rect[i].h){
+                            			printf("----E2-----");
+                            			 x2 = ((event.button.x-350)/34);y2 = ((event.button.y-100)/34);fprintf(stdout,"La position de x2= %d et y2= %d\n\n\n", x2 , y2);click=0;}break;
+                            		}
+                            	// ---/!\---Le programme "saisie" oblige à l'utilisateur de rentrer l'id du mot trouver donc non compatible avec la SDL	
+                        		}
                             }
                             
                             
