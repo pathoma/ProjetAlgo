@@ -323,7 +323,7 @@ SDL_Rect rect2[longueur_liste];
 
 			rect_menu7.w = 250; 
 			rect_menu7.h = 50;
-			rect_menu7.y = 800;
+			rect_menu7.y = 700;
 			rect_menu7.x = (dimWinW/2)-rect_menu7.w/2;
 			
 		SDL_RenderFillRect(renderer,&rect_menu7);
